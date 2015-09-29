@@ -209,7 +209,7 @@ object Notification extends js.Object {
  * @param options   The options to configure this notification
  * @return a new Notification
  */
-@JSName("Notification.Notification")
+@JSName("Notification")
 class Notification(
     title: String,
     options: NotificationOptions = ???) extends EventTarget {
