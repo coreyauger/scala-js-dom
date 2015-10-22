@@ -669,9 +669,9 @@ trait ServiceWorkerContainer extends EventTarget {
  * MDN
  */
 class Navigator extends NavigatorID with NavigatorOnLine with NavigatorContentUtils with NavigatorGeolocation with NavigatorStorageUtils {
-  
+
   val serviceWorker: ServiceWorkerContainer = js.native
-  
+
 }
 
 trait NodeSelector extends js.Object {
@@ -2586,7 +2586,7 @@ class Touch extends js.Object {
    *
    * MDN
    */
-  def identifier: Int = js.native
+  def identifier: Double = js.native
 
   /**
    * The X coordinate of the touch point relative to the left edge of the screen.
@@ -3086,7 +3086,7 @@ class MessageEvent extends Event {
   def origin: String = js.native
 
   /**
-   * The data from the server ([[String]], [[Blob]], or [[ArrayBuffer]])
+   * The data from the server (`String`, [[Blob]], or `ArrayBuffer`)
    *
    * MDN
    */
@@ -3730,6 +3730,47 @@ trait NavigatorGeolocation extends js.Object {
 trait NavigatorContentUtils extends js.Object {
 }
 
+/**
+ * When dragging, there are several operations that may be performed. The copy
+ * operation is used to indicate that the data being dragged will be copied from
+ * its present location to the drop location. The move operation is used to
+ * indicate that the data being dragged will be moved, and the link operation is
+ * used to indicate that some form of relationship or connection will be created
+ * between the source and drop locations.
+ *
+ * You can specify which of the three operations are allowed for a drag source
+ * by setting the `effectAllowed` property within a `dragstart` event listener.
+ *
+ * Note that these values must be used exactly as defined below.
+ *
+ * https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_operations#drageffects
+ */
+object DragEffect {
+
+  /** no operation is permitted */
+  final val None = "none"
+
+  /** copy only */
+  final val Copy = "copy"
+
+  /** move only */
+  final val Move = "move"
+
+  /** link only */
+  final val Link = "link"
+
+  /** copy or move only */
+  final val CopyMove = "copyMove"
+
+  /** copy or link only */
+  final val CopyLink = "copyLink"
+
+  /** link or move only */
+  final val LinkMove = "linkMove"
+
+  /** copy, move, or link */
+  final val All = "all"
+}
 
 /**
  * The DataTransfer object is used to hold the data that is being dragged during a drag
@@ -3749,6 +3790,8 @@ trait DataTransfer extends js.Object {
    * for other events.
    *
    * MDN
+   *
+   * See [[DragEffect]] for possible values.
    */
   var effectAllowed: String = js.native
 
@@ -3757,6 +3800,8 @@ trait DataTransfer extends js.Object {
    * of effectAllowed.
    *
    * MDN
+   *
+   * See [[DragEffect]] for possible values.
    */
   var dropEffect: String = js.native
 
@@ -3836,7 +3881,7 @@ trait ClipboardEventInit extends js.Object {
 object ClipboardEventInit {
   /**
    * Construct a new ClipboardEventInit
-   * 
+   *
    * @param data       The data for this clipboard event
    * @param dataType   The MIME type of the data.
    * @return a new ClipBoardEventInit
@@ -6969,6 +7014,50 @@ class FormData(form: HTMLFormElement = js.native) extends js.Object {
    */
   def append(name: js.Any, value: js.Any, blobName: String = js.native): Unit = js.native
 
+  /**
+   * The delete() method of the FormData interface deletes a key and its value(s)
+   * from a FormData object.
+   * Note: This method is available in Web Workers.
+   *
+   * MDN
+   */
+  def delete(name: js.Any): Unit = js.native
+
+  /**
+   * The get() method of the FormData interface returns the first value associated with
+   * a given key from within a FormData object. If you expect multiple values and want
+   * all of them, use the getAll() method instead.
+   *
+   * MDN
+   */
+  def get(name: js.Any): js.Any = js.native
+
+  /**
+   * The getAll() method of the FormData interface returns all the values associated
+   * with a given key from within a FormData object.
+   *
+   * MDN
+   */
+  def getAll(name: js.Any): js.Any = js.native
+
+  /**
+   * The has() method of the FormData interface returns a boolean stating whether a
+   * FormData object contains a certain key.
+   *
+   * MDN
+   */
+  def has(name: js.Any): Boolean = js.native
+
+  /**
+   * The difference between set() and FormData.append is that if the specified header
+   * does already exist, set() will overwrite the existing value with the new one,
+   * whereas FormData.append will append the new value onto the end of the set of
+   * values.
+   *
+   * MDN
+   */
+  def set(name: js.Any, value: js.Any, blobName: String = js.native): Unit = js.native
+  
 }
 
 object FormData extends js.Object {

@@ -100,7 +100,11 @@ trait NotificationOptions extends js.Object {
    *
    * MDN
    */
+<<<<<<< HEAD
   var onclick: js.Function0[Any] = js.native
+=======
+  val onclick: js.Function0[Any] = js.native
+>>>>>>> formdata-additions
 
   /**
    * The onerror property of the Notification interface specifies an event
@@ -110,7 +114,11 @@ trait NotificationOptions extends js.Object {
    *
    * MDN
    */
+<<<<<<< HEAD
   var onerror: js.Function0[Any] = js.native
+=======
+  val onerror: js.Function0[Any] = js.native
+>>>>>>> formdata-additions
 
   val vibrate: js.Array[Double] = js.native
 }
@@ -198,6 +206,7 @@ object Notification extends js.Object {
 
 /**
  * The Notification interface allows to notify users of an incoming message
+<<<<<<< HEAD
  * or event
  * NOTE: requires permission
  * Note: This feature is available in Web Workers.
@@ -209,6 +218,22 @@ object Notification extends js.Object {
  */
 @JSName("Notification")
 class Notification( title: String,
+=======
+ * or event.
+ *
+ * NOTE: requires permission
+ * Note: This feature is available in Web Workers.
+ *
+ * MDN
+ *
+ * @param title     The text title of the notification
+ * @param options   The options to configure this notification
+ * @return a new Notification
+ */
+@JSName("Notification")
+class Notification(
+    title: String,
+>>>>>>> formdata-additions
     options: NotificationOptions = ???) extends EventTarget {
 
   /**

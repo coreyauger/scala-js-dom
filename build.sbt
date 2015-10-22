@@ -7,7 +7,7 @@ name := "Scala.js DOM"
 
 normalizedName := "scalajs-dom"
 
-version := "0.8.2-SNAPSHOT"
+version := "0.9.0-SNAPSHOT"
 
 organization := "org.scala-js"
 
@@ -15,7 +15,7 @@ scalaVersion := "2.11.6"
 
 crossScalaVersions := Seq("2.10.5", "2.11.6")
 
-scalacOptions ++= Seq("-deprecation", "-feature")
+scalacOptions ++= Seq("-deprecation", "-feature", "-Xfatal-warnings")
 
 homepage := Some(url("http://scala-js.org/"))
 
