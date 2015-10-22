@@ -7014,6 +7014,50 @@ class FormData(form: HTMLFormElement = js.native) extends js.Object {
    */
   def append(name: js.Any, value: js.Any, blobName: String = js.native): Unit = js.native
 
+  /**
+   * The delete() method of the FormData interface deletes a key and its value(s)
+   * from a FormData object.
+   * Note: This method is available in Web Workers.
+   *
+   * MDN
+   */
+  def delete(name: js.Any): Unit = js.native
+
+  /**
+   * The get() method of the FormData interface returns the first value associated with
+   * a given key from within a FormData object. If you expect multiple values and want
+   * all of them, use the getAll() method instead.
+   *
+   * MDN
+   */
+  def get(name: js.Any): js.Any = js.native
+
+  /**
+   * The getAll() method of the FormData interface returns all the values associated
+   * with a given key from within a FormData object.
+   *
+   * MDN
+   */
+  def getAll(name: js.Any): js.Any = js.native
+
+  /**
+   * The has() method of the FormData interface returns a boolean stating whether a
+   * FormData object contains a certain key.
+   *
+   * MDN
+   */
+  def has(name: js.Any): Boolean = js.native
+
+  /**
+   * The difference between set() and FormData.append is that if the specified header
+   * does already exist, set() will overwrite the existing value with the new one,
+   * whereas FormData.append will append the new value onto the end of the set of
+   * values.
+   *
+   * MDN
+   */
+  def set(name: js.Any, value: js.Any, blobName: String = js.native): Unit = js.native
+  
 }
 
 object FormData extends js.Object {
