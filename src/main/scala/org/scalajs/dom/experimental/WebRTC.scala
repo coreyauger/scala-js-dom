@@ -1,6 +1,6 @@
 package org.scalajs.dom.experimental
 
-import org.scalajs.dom.raw.{DOMError, EventTarget}
+import org.scalajs.dom.raw.{Event, DOMError, EventTarget}
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
@@ -16,7 +16,7 @@ trait MediaStreamTrack extends EventTarget{
    *
    * MDN
    */
-  val enabled: Boolean = js.native
+  var enabled: Boolean = js.native
 
   /**
    * READONLY Returns a DOMString containing a unique identifier (GUID) for the
@@ -231,7 +231,7 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  val onactive: js.Function0[Any] = js.native
+  var onactive: js.Function0[Any] = js.native
 
   /**
    * Is an EventHandler containing the action to perform when an addtrack event
@@ -239,7 +239,7 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  val onaddtrack: js.Function0[Any] = js.native
+  var onaddtrack: js.Function0[Any] = js.native
 
   /**
    * Is an EventHandler containing the action to perform when an inactive event
@@ -255,7 +255,7 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  val onremovetrack: js.Function0[Any] = js.native
+  var onremovetrack: js.Function0[Any] = js.native
 
   /**
    * Stores a copy of the MediaStreamTrack given as argument. If the track has
@@ -275,7 +275,7 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  def getAudioTracks(): MediaStreamTrack = js.native
+  def getAudioTracks(): js.Array[MediaStreamTrack] = js.native
 
   /**
    * Returns the track whose ID corresponds to the one given in parameters,
@@ -295,7 +295,7 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  def getTracks(): MediaStreamTrack = js.native
+  def getTracks(): js.Array[MediaStreamTrack] = js.native
 
   /**
    * Returns a list of the MediaStreamTrack objects stored in the MediaStream
@@ -305,7 +305,7 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  def getVideoTracks(): MediaStreamTrack = js.native
+  def getVideoTracks(): js.Array[MediaStreamTrack] = js.native
 
   /**
    * Removes the MediaStreamTrack given as argument. If the track is not part
@@ -338,18 +338,24 @@ object RTCIdentityAssertion{
 
 @js.native
 trait MediaConstraints extends js.Object{
-  var audio:Boolean = js.native
-  var video:Boolean = js.native
+  var audio: Boolean = js.native
+  var video: Boolean = js.native
+  var optional: js.Array[js.Dynamic] =  js.native
+  var mandatory: js.Array[js.Dynamic] =  js.native
 }
 
 object MediaConstraints {
   def apply(
              video: js.UndefOr[Boolean] = js.undefined,
-             audio: js.UndefOr[Boolean] = js.undefined
+             audio: js.UndefOr[Boolean] = js.undefined,
+             optional: js.UndefOr[js.Array[js.Dynamic]] = js.undefined,
+             mandatory: js.UndefOr[js.Dynamic] = js.undefined
              ): MediaConstraints = {
     val result = js.Dynamic.literal()
     video.foreach(result.video = _)
     audio.foreach(result.audio = _)
+    optional.foreach(result.optional = _)
+    mandatory.foreach(result.mandatory = _)
     result.asInstanceOf[MediaConstraints]
   }
 }
@@ -475,6 +481,11 @@ trait RTCDTMFSender{
 //https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection
 trait RTCStatsReport{
   // TODO: ..
+}
+
+@js.native
+trait RTCPeerConnectionIceEvent extends Event{
+  val candidate:RTCIceCandidate  = js.native
 }
 
 /**
@@ -604,7 +615,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  val onaddstream: js.Function0[Any] = js.native
+  var onaddstream: js.Function0[Any] = js.native
 
   /**
    * Is the event handler called when the datachannel event is received. Such
@@ -612,7 +623,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  val ondatachannel: js.Function0[Any] = js.native
+  var ondatachannel: js.Function0[Any] = js.native
 
   /**
    * Is the event handler called when the icecandidate event is received. Such
@@ -620,7 +631,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  val onicecandidate: js.Function0[Any] = js.native
+  var onicecandidate: js.Function1[RTCPeerConnectionIceEvent, Any] = js.native
 
   /**
    * Is the event handler called when the iceconnectionstatechange event is
@@ -629,7 +640,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  val oniceconnectionstatechange: js.Function0[Any] = js.native
+  var oniceconnectionstatechange: js.Function0[Any] = js.native
 
   /**
    * Is the event handler called when the identityresult event is received.
@@ -638,7 +649,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  val onidentityresult: js.Function0[Any] = js.native
+  var onidentityresult: js.Function0[Any] = js.native
 
   /**
    * Is the event handler called when the idpassertionerror event is received.
@@ -647,7 +658,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  val onidpassertionerror: js.Function0[Any] = js.native
+  var onidpassertionerror: js.Function0[Any] = js.native
 
   /**
    * Is the event handler alled when the idpvalidationerror event is received.
@@ -656,7 +667,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  val onidpvalidationerror: js.Function0[Any] = js.native
+  var onidpvalidationerror: js.Function0[Any] = js.native
 
   /**
    * Is the event handler called when the negotiationneeded event, sent by the
@@ -665,7 +676,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  val onnegotiationneeded: js.Function0[Any] = js.native
+  var onnegotiationneeded: js.Function0[Any] = js.native
 
   /**
    * Is the event handler called when the peeridentity event, sent when a peer
@@ -673,7 +684,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  val onpeeridentity: js.Function0[Any] = js.native
+  var onpeeridentity: js.Function0[Any] = js.native
 
   /**
    * Is the event handler called when the removestream event, sent when a
@@ -681,7 +692,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  val onremovestream: js.Function0[Any] = js.native
+  var onremovestream: js.Function0[Any] = js.native
 
   /**
    * Is the event handler called when the signalingstatechange event, sent when
@@ -689,7 +700,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  val onsignalingstatechange: js.Function0[Any] = js.native
+  var onsignalingstatechange: js.Function0[Any] = js.native
 
   /**
    * Creates an offer that is a request to find a remote peer with a specific
@@ -721,7 +732,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  def setLocalDescription(description:RTCSessionDescription): Unit = js.native
+  def setLocalDescription(description:RTCSessionDescription, success:js.Function0[Any], error:js.Function1[DOMError,Any]): Unit = js.native
 
   /**
    * Changes the remote description associated with the connection. The
@@ -857,8 +868,20 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
   def getIdentityAssertion(id: js.Any): Unit = js.native
 }
 
-
+/*
 @js.native
 trait NavigatorGetUserMedia extends js.Object {
   def getUserMedia(constraints: MediaConstraints, callback:(DOMError, MediaStream) => Unit):Unit = js.native
+}*/
+
+@JSName("window.navigator")
+@js.native
+object NavigatorGetUserMedia extends js.Object {
+
+  def getUserMedia(constraints: MediaConstraints, callback:js.Function1[MediaStream, Any], error:js.Function1[DOMError, Any] ):Unit = js.native
+
+  def webkitGetUserMedia(constraints: MediaConstraints, callback:js.Function1[MediaStream, Any], error:js.Function1[DOMError, Any] ):Unit = js.native
+
+  def webkitGetScreenMedia(callback:js.Function1[MediaStream, Any], error:js.Function1[DOMError, Any] ):Unit = js.native
+
 }
