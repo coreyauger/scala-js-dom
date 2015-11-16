@@ -1,6 +1,7 @@
-package org.scalajs.dom.experimental
+package org.scalajs.dom.experimental.webrtc
 
-import org.scalajs.dom.raw.{Event, DOMError, EventTarget}
+import org.scalajs.dom.raw.{DOMError, Event, EventTarget}
+
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
@@ -361,13 +362,13 @@ object MediaConstraints {
 }
 
 @js.native
-trait RTCIceServer{
-  var url:String
-  var username:String
-  var credential:String
+trait RTCIceServer extends js.Object{
+  var url:String  = js.native
+  var username:String  = js.native
+  var credential:String  = js.native
 }
 
-object RTCIceServer {
+object RTCIceServer{
   def apply(
              url: js.UndefOr[String] = js.undefined,
              username: js.UndefOr[String] = js.undefined,
@@ -382,8 +383,8 @@ object RTCIceServer {
 }
 
 @js.native
-trait RTCConfiguration{
-  var iceServers:js.Array[RTCIceServer]
+trait RTCConfiguration extends js.Object{
+  var iceServers:js.Array[RTCIceServer] = js.native
 }
 
 object RTCConfiguration {
@@ -432,6 +433,18 @@ class RTCSessionDescription(options: js.Dynamic) extends js.Object {
    * MDN
    */
   def toJson():js.Any = js.native
+}
+
+object RTCSessionDescription{
+  def apply(
+     `type`: js.UndefOr[String] = js.undefined,
+     sdp:   js.UndefOr[String] = js.undefined
+  ): RTCSessionDescription = {
+    val result = js.Dynamic.literal()
+    `type`.foreach(result.`type` = _)
+    sdp.foreach(result.sdp = _)
+    result.asInstanceOf[RTCSessionDescription]
+  }
 }
 
 object RTCSdpType{
@@ -486,6 +499,24 @@ trait RTCStatsReport{
 @js.native
 trait RTCPeerConnectionIceEvent extends Event{
   val candidate:RTCIceCandidate  = js.native
+}
+
+object IceConnectionState{
+  val `new` = "new"
+  val checking = "checking"
+  val connected = "connected"
+  val completed = "completed"
+  val failed = "failed"
+  val disconnected = "disconnected"
+  val closed = "closed"
+}
+
+object SignalingState{
+  val stable = "stable"
+  val have_local_offer = "have-local-offer"
+  val have_local_pranswer = "have-local-pranswer"
+  val have_remote_pranswer = "have-remote-pranswer"
+  val closed = "closed"
 }
 
 /**
@@ -615,7 +646,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  var onaddstream: js.Function0[Any] = js.native
+  var onaddstream: js.Function1[Event, Any] = js.native
 
   /**
    * Is the event handler called when the datachannel event is received. Such
@@ -623,7 +654,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  var ondatachannel: js.Function0[Any] = js.native
+  var ondatachannel: js.Function1[Event, Any] = js.native
 
   /**
    * Is the event handler called when the icecandidate event is received. Such
@@ -640,7 +671,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  var oniceconnectionstatechange: js.Function0[Any] = js.native
+  var oniceconnectionstatechange: js.Function1[Event, Any] = js.native
 
   /**
    * Is the event handler called when the identityresult event is received.
@@ -649,7 +680,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  var onidentityresult: js.Function0[Any] = js.native
+  var onidentityresult: js.Function1[Event, Any] = js.native
 
   /**
    * Is the event handler called when the idpassertionerror event is received.
@@ -658,7 +689,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  var onidpassertionerror: js.Function0[Any] = js.native
+  var onidpassertionerror: js.Function1[Event, Any] = js.native
 
   /**
    * Is the event handler alled when the idpvalidationerror event is received.
@@ -667,7 +698,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  var onidpvalidationerror: js.Function0[Any] = js.native
+  var onidpvalidationerror: js.Function1[Event ,Any] = js.native
 
   /**
    * Is the event handler called when the negotiationneeded event, sent by the
@@ -676,7 +707,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  var onnegotiationneeded: js.Function0[Any] = js.native
+  var onnegotiationneeded: js.Function1[Event, Any] = js.native
 
   /**
    * Is the event handler called when the peeridentity event, sent when a peer
@@ -684,7 +715,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  var onpeeridentity: js.Function0[Any] = js.native
+  var onpeeridentity: js.Function1[Event, Any] = js.native
 
   /**
    * Is the event handler called when the removestream event, sent when a
@@ -692,7 +723,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  var onremovestream: js.Function0[Any] = js.native
+  var onremovestream: js.Function1[Event, Any] = js.native
 
   /**
    * Is the event handler called when the signalingstatechange event, sent when
@@ -700,7 +731,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  var onsignalingstatechange: js.Function0[Any] = js.native
+  var onsignalingstatechange: js.Function1[Event, Any] = js.native
 
   /**
    * Creates an offer that is a request to find a remote peer with a specific
@@ -744,7 +775,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  def setRemoteDescription(description:RTCSessionDescription): Unit = js.native
+  def setRemoteDescription(description:RTCSessionDescription, success:js.Function0[Any], error:js.Function1[DOMError,Any]): Unit = js.native
 
   /**
    * The updateIce method updates the ICE Agent process of gathering local
@@ -770,7 +801,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
    *
    * MDN
    */
-  def addIceCandidate(candidate:RTCIceCandidate, success:js.Function1[Any, Any], error:js.Function1[DOMError, Any]): Unit = js.native
+  def addIceCandidate(candidate:RTCIceCandidate, success:js.Function0[Any], error:js.Function1[DOMError, Any]): Unit = js.native
 
   def getConfiguration(): RTCConfiguration = js.native
 
@@ -873,6 +904,7 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
 trait NavigatorGetUserMedia extends js.Object {
   def getUserMedia(constraints: MediaConstraints, callback:(DOMError, MediaStream) => Unit):Unit = js.native
 }*/
+/*
 
 @JSName("window.navigator")
 @js.native
@@ -885,3 +917,4 @@ object NavigatorGetUserMedia extends js.Object {
   def webkitGetScreenMedia(callback:js.Function1[MediaStream, Any], error:js.Function1[DOMError, Any] ):Unit = js.native
 
 }
+*/
