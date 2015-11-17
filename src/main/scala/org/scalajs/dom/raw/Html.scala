@@ -12,6 +12,7 @@ package org.scalajs.dom.raw
 
 import scala.scalajs.js
 
+@js.native
 abstract class HTMLDocument extends Document {
 
   /**
@@ -70,7 +71,7 @@ abstract class HTMLDocument extends Document {
   var dir: String = js.native
 
   /**
-   * Can be used to make any document editable, for example in a <iframe />:
+   * Can be used to make any document editable, for example in a &lt;iframe /&gt;:
    *
    * MDN
    */
@@ -140,15 +141,15 @@ abstract class HTMLDocument extends Document {
   def defaultView: Window = js.native
 
   /**
-   * Returns the <head> element of the current document. If there are more than one
-   * <head> elements, the first one is returned.
+   * Returns the &lt;head&gt; element of the current document. If there are more than one
+   * &lt;head&gt; elements, the first one is returned.
    *
    * MDN
    */
   def head: HTMLHeadElement = js.native
 
   /**
-   * Returns the <body> or <frameset> node of the current document, or null if no such
+   * Returns the &lt;body&gt; or &lt;frameset&gt; node of the current document, or null if no such
    * element exists.
    *
    * MDN
@@ -164,7 +165,7 @@ abstract class HTMLDocument extends Document {
   def activeElement: Element = js.native
 
   /**
-   * Returns a list of the embedded <embed> elements within the current document.
+   * Returns a list of the embedded &lt;embed&gt; elements within the current document.
    *
    * MDN
    */
@@ -195,7 +196,7 @@ abstract class HTMLDocument extends Document {
 
   /**
    * Returns an HTMLCollection object containing one or more HTMLEmbedElements or
-   * null which represent the <embed> elements in the current document.
+   * null which represent the &lt;embed&gt; elements in the current document.
    *
    * MDN
    */
@@ -545,6 +546,7 @@ abstract class HTMLDocument extends Document {
  *
  * MDN
  */
+@js.native
 abstract class HTMLTableElement extends HTMLElement {
   /**
    * Is a DOMString containing the length in pixels or in percentage of the desired width
@@ -562,12 +564,12 @@ abstract class HTMLTableElement extends HTMLElement {
    */
   var cellSpacing: String = js.native
   /**
-   * Is an HTMLTableSectionElement representing the first <tfoot> that is a child of
+   * Is an HTMLTableSectionElement representing the first &lt;tfoot&gt; that is a child of
    * the element, or null if none is found. When set, if the object doesn't represent a
-   * <tfoot>, a DOMException with the HierarchyRequestError name is thrown. If a
+   * &lt;tfoot&gt;, a DOMException with the HierarchyRequestError name is thrown. If a
    * correct object is given, it is inserted in the tree immediately before the first
-   * element that is neither a <caption>, a <colgroup>, nor a <thead>, or as the last
-   * child if there is no such element, and the first <tfoot> that is a child of this
+   * element that is neither a &lt;caption&gt;, a &lt;colgroup&gt;, nor a &lt;thead&gt;, or as the last
+   * child if there is no such element, and the first &lt;tfoot&gt; that is a child of this
    * element is removed from the tree, if any.
    *
    * MDN
@@ -584,9 +586,9 @@ abstract class HTMLTableElement extends HTMLElement {
 
   /**
    * Returns a live HTMLCollection containing all the rows of the element, that is all
-   * <tr> that are a child of the element, or a child or one of its <thead>, <tbody> and
-   * <tfoot> children. The rows members of a <thead> appear first, in tree order, and
-   * those members of a <tbody> last, also in tree order. The HTMLCollection is live and
+   * &lt;tr&gt; that are a child of the element, or a child or one of its &lt;thead&gt;, &lt;tbody&gt; and
+   * &lt;tfoot&gt; children. The rows members of a &lt;thead&gt; appear first, in tree order, and
+   * those members of a &lt;tbody&gt; last, also in tree order. The HTMLCollection is live and
    * is automatically updated when the HTMLTableElement changes.
    *
    * MDN
@@ -608,18 +610,18 @@ abstract class HTMLTableElement extends HTMLElement {
    */
   var summary: String = js.native
   /**
-   * Is an HTMLTableCaptionElement representing the first <caption> that is a child of
+   * Is an HTMLTableCaptionElement representing the first &lt;caption&gt; that is a child of
    * the element, or null if none is found. When set, if the object doesn't represent a
-   * <caption>, a DOMException with the HierarchyRequestError name is thrown. If a
+   * &lt;caption&gt;, a DOMException with the HierarchyRequestError name is thrown. If a
    * correct object is given, it is inserted in the tree as the first child of this element
-   * and the first <caption> that is a child of this element is removed from the tree, if
+   * and the first &lt;caption&gt; that is a child of this element is removed from the tree, if
    * any.
    *
    * MDN
    */
   var caption: HTMLTableCaptionElement = js.native
   /**
-   * Returns a live HTMLCollection containing all the <tbody> of the element. The
+   * Returns a live HTMLCollection containing all the &lt;tbody&gt; of the element. The
    * HTMLCollection is live and is automatically updated when the HTMLTableElement
    * changes.
    *
@@ -627,12 +629,12 @@ abstract class HTMLTableElement extends HTMLElement {
    */
   var tBodies: HTMLCollection = js.native
   /**
-   * Is an HTMLTableSectionElement representing the first <thead> that is a child of
+   * Is an HTMLTableSectionElement representing the first &lt;thead&gt; that is a child of
    * the element, or null if none is found. When set, if the object doesn't represent a
-   * <thead>, a DOMException with the HierarchyRequestError name is thrown. If a
+   * &lt;thead&gt;, a DOMException with the HierarchyRequestError name is thrown. If a
    * correct object is given, it is inserted in the tree immediately before the first
-   * element that is neither a <caption>, nor a <colgroup>, or as the last child if there
-   * is no such element, and the first <thead> that is a child of this element is removed
+   * element that is neither a &lt;caption&gt;, nor a &lt;colgroup&gt;, or as the last child if there
+   * is no such element, and the first &lt;thead&gt; that is a child of this element is removed
    * from the tree, if any.
    *
    * MDN
@@ -674,15 +676,15 @@ abstract class HTMLTableElement extends HTMLElement {
   def createTBody(): HTMLElement = js.native
 
   /**
-   * Removes the first <caption> that is a child of the element.
+   * Removes the first &lt;caption&gt; that is a child of the element.
    *
    * MDN
    */
   def deleteCaption(): Unit = js.native
   /**
    * Returns an HTMLElement representing a new row of the table. It inserts it in the rows
-   * collection immediately before the <tr> element at the givent index position. If
-   * necessary a <tbody> is created. If the index is -1, the new row is appended to the
+   * collection immediately before the &lt;tr&gt; element at the givent index position. If
+   * necessary a &lt;tbody&gt; is created. If the index is -1, the new row is appended to the
    * collection. If the index is smaller than -1 or greater than the number of rows in the
    * collection, a DOMException with the value IndexSizeError is raised.
    *
@@ -693,16 +695,16 @@ abstract class HTMLTableElement extends HTMLElement {
 
 
   /**
-   * Removes the first <tfoot> that is a child of the element.
+   * Removes the first &lt;tfoot&gt; that is a child of the element.
    *
    * MDN
    */
   def deleteTFoot(): Unit = js.native
 
   /**
-   * Returns an HTMLElement representing the first <thead> that is a child of the
+   * Returns an HTMLElement representing the first &lt;thead&gt; that is a child of the
    * element. If none is found, a new one is created and inserted in the tree immediately
-   * before the first element that is neither a <caption>, nor a <colgroup>, or as the
+   * before the first element that is neither a &lt;caption&gt;, nor a &lt;colgroup&gt;, or as the
    * last child if there is no such element.
    *
    * MDN
@@ -710,16 +712,16 @@ abstract class HTMLTableElement extends HTMLElement {
   def createTHead(): HTMLElement = js.native
 
   /**
-   * Removes the first <thead> that is a child of the element.
+   * Removes the first &lt;thead&gt; that is a child of the element.
    *
    * MDN
    */
   def deleteTHead(): Unit = js.native
 
   /**
-   * Returns an HTMLElement representing the first <caption> that is a child of the
+   * Returns an HTMLElement representing the first &lt;caption&gt; that is a child of the
    * element. If none is found, a new one is created and inserted in the tree as the first
-   * child of the <table> element.
+   * child of the &lt;table&gt; element.
    *
    * MDN
    */
@@ -728,9 +730,9 @@ abstract class HTMLTableElement extends HTMLElement {
   def moveRow(indexFrom: Int = js.native, indexTo: Int = js.native): Object = js.native
 
   /**
-   * Returns an HTMLElement representing the first <tfoot> that is a child of the
+   * Returns an HTMLElement representing the first &lt;tfoot&gt; that is a child of the
    * element. If none is found, a new one is created and inserted in the tree immediately
-   * before the first element that is neither a <caption>, a <colgroup>, nor a <thead>,
+   * before the first element that is neither a &lt;caption&gt;, a &lt;colgroup&gt;, nor a &lt;thead&gt;,
    * or as the last child if there is no such element.
    *
    * MDN
@@ -746,6 +748,7 @@ abstract class HTMLTableElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLTableDataCellElement extends HTMLTableCellElement {
 }
 
@@ -756,6 +759,7 @@ abstract class HTMLTableDataCellElement extends HTMLTableCellElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLBaseElement extends HTMLElement {
   /**
    * Is a DOMString that reflects the target HTML attribute, containing a default
@@ -774,17 +778,19 @@ abstract class HTMLBaseElement extends HTMLElement {
   var href: String = js.native
 }
 
+@js.native
 trait HTMLNextIdElement extends HTMLElement {
   var n: String = js.native
 }
 
 /**
  * The HTMLParagraphElement interface provides special properties (beyond those
- * of the regular HTMLElement object interface it inherits) for manipulating <p>
+ * of the regular HTMLElement object interface it inherits) for manipulating &lt;p&gt;
  * elements.
  *
  * MDN
  */
+@js.native
 abstract class HTMLParagraphElement extends HTMLElement {
   /**
    * Enumerated property indicating alignment of the element's contents with respect
@@ -796,13 +802,14 @@ abstract class HTMLParagraphElement extends HTMLElement {
   var align: String = js.native
 }
 
-
+@js.native
 trait HTMLAreasCollection extends HTMLCollection {
   def remove(index: Int = js.native): Unit = js.native
 
   def add(element: HTMLElement, before: js.Any = js.native): Unit = js.native
 }
 
+@js.native
 abstract class HTMLAppletElement extends HTMLElement {
   var width: Double = js.native
   var codeType: String = js.native
@@ -832,6 +839,7 @@ abstract class HTMLAppletElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLOListElement extends HTMLElement {
   /**
    * Is a long value reflecting the start and defining the value of the first number of the
@@ -849,9 +857,10 @@ abstract class HTMLOListElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLSelectElement extends HTMLElement {
   /**
-   * The set of <option> elements contained by this element. Read only.
+   * The set of &lt;option&gt; elements contained by this element. Read only.
    *
    * MDN
    */
@@ -886,13 +895,13 @@ abstract class HTMLSelectElement extends HTMLElement {
    */
   var size: Int= js.native
   /**
-   * The number of <option> elements in this select element.
+   * The number of &lt;option&gt; elements in this select element.
    *
    * MDN
    */
   var length: Int = js.native
   /**
-   * The index of the first selected <option> element.
+   * The index of the first selected &lt;option&gt; element.
    *
    * MDN
    */
@@ -973,6 +982,7 @@ abstract class HTMLSelectElement extends HTMLElement {
   def setCustomValidity(error: String): Unit = js.native
 }
 
+@js.native
 trait HTMLBlockElement extends HTMLElement {
   var width: Double = js.native
   var cite: String = js.native
@@ -985,6 +995,7 @@ trait HTMLBlockElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLMetaElement extends HTMLElement {
   /**
    * Gets or sets the name of an HTTP response header to define for a document.
@@ -1014,6 +1025,7 @@ abstract class HTMLMetaElement extends HTMLElement {
   var charset: String = js.native
 }
 
+@js.native
 abstract class HTMLDDElement extends HTMLElement {
   var noWrap: Boolean = js.native
 }
@@ -1026,6 +1038,7 @@ abstract class HTMLDDElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLLinkElement extends HTMLElement with LinkStyle {
   /**
    * Gets or sets the forward relationship of the linked resource from the document to
@@ -1074,6 +1087,7 @@ abstract class HTMLLinkElement extends HTMLElement with LinkStyle {
   var hreflang: String = js.native
 }
 
+@js.native
 abstract class HTMLFontElement extends HTMLElement {
   var face: String = js.native
 }
@@ -1085,6 +1099,7 @@ abstract class HTMLFontElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLTableCaptionElement extends HTMLElement {
   /**
    * Enumerated attribute indicating alignment of the caption with respect to the
@@ -1097,15 +1112,16 @@ abstract class HTMLTableCaptionElement extends HTMLElement {
 }
 
 /**
- * The HTMLOptionElement interface represents <option> elements and inherits all
+ * The HTMLOptionElement interface represents &lt;option&gt; elements and inherits all
  * classes and methods of the HTMLElement interface.
  *
  * MDN
  */
+@js.native
 abstract class HTMLOptionElement extends HTMLElement {
   /**
    * The position of the option within the list of options it belongs to, in tree-order.
-   * If the option is not part of a list of options, like when it is part of the <datalist>
+   * If the option is not part of a list of options, like when it is part of the &lt;datalist&gt;
    * element, the value is 0.
    *
    * MDN
@@ -1132,7 +1148,7 @@ abstract class HTMLOptionElement extends HTMLElement {
    */
   var text: String = js.native
   /**
-   * If the option is a descendent of a <select> element, then this property has the same
+   * If the option is a descendent of a &lt;select&gt; element, then this property has the same
    * value as the form property of the corresponding HTMLSelectElement object;
    * otherwise, it is null.
    *
@@ -1164,23 +1180,25 @@ abstract class HTMLOptionElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLMapElement extends HTMLElement {
   /**
-   * Is a DOMString representing the <map> element for referencing it other context. If
+   * Is a DOMString representing the &lt;map&gt; element for referencing it other context. If
    * the id attribute is set, this must have the same value; and it cannot be null or empty.
    *
    * MDN
    */
   var name: String = js.native
   /**
-   * Is a live HTMLCollection representing the <area> elements associated to this
-   * <map>.
+   * Is a live HTMLCollection representing the &lt;area&gt; elements associated to this
+   * &lt;map&gt;.
    *
    * MDN
    */
   var areas: HTMLAreasCollection = js.native
 }
 
+@js.native
 abstract class HTMLMenuElement extends HTMLElement {
   var `type`: String = js.native
 }
@@ -1191,6 +1209,7 @@ abstract class HTMLMenuElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLCollection extends DOMList[Element]{
 
   /**
@@ -1217,10 +1236,11 @@ abstract class HTMLCollection extends DOMList[Element]{
 /**
  * The HTMLImageElement interface provides special properties and methods (beyond
  * the regular HTMLElement interface it also has available to it by inheritance) for
- * manipulating the layout and presentation of <img> elements.
+ * manipulating the layout and presentation of &lt;img&gt; elements.
  *
  * MDN
  */
+@js.native
 abstract class HTMLImageElement extends HTMLElement {
   /**
    * Reflects the width HTML attribute, indicating the rendered width of the image in
@@ -1320,6 +1340,7 @@ abstract class HTMLImageElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLAreaElement extends HTMLElement {
   /**
    * Is a DOMString containing the protocol component (including trailing colon ':'),
@@ -1413,11 +1434,12 @@ abstract class HTMLAreaElement extends HTMLElement {
 
 /**
  * The HTMLButtonElement interface provides properties and methods (beyond the
- * <button> object interface it also has available to them by inheritance) for
+ * &lt;button&gt; object interface it also has available to them by inheritance) for
  * manipulating the layout and presentation of button elements.
  *
  * MDN
  */
+@js.native
 abstract class HTMLButtonElement extends HTMLElement {
   /**
    * The current form control value of the button.
@@ -1455,7 +1477,7 @@ abstract class HTMLButtonElement extends HTMLElement {
   /**
    * A name or keyword indicating where to display the response that is received after
    * submitting the form. If specified, this attribute overrides the target attribute
-   * of the <form> element that owns this element.
+   * of the &lt;form&gt; element that owns this element.
    *
    * MDN
    */
@@ -1469,7 +1491,7 @@ abstract class HTMLButtonElement extends HTMLElement {
   var willValidate: Boolean = js.native
   /**
    * The URI of a resource that processes information submitted by the button. If
-   * specified, this attribute overrides the action attribute of the <form> element
+   * specified, this attribute overrides the action attribute of the &lt;form&gt; element
    * that owns this element.
    *
    * MDN
@@ -1491,7 +1513,7 @@ abstract class HTMLButtonElement extends HTMLElement {
   var validity: ValidityState = js.native
   /**
    * Indicates that the form is not to be validated when it is submitted. If specified,
-   * this attribute overrides the enctype attribute of the <form> element that owns
+   * this attribute overrides the enctype attribute of the &lt;form&gt; element that owns
    * this element.
    *
    * MDN
@@ -1500,7 +1522,7 @@ abstract class HTMLButtonElement extends HTMLElement {
   var formEnctype: String = js.native
   /**
    * The HTTP method that the browser uses to submit the form. If specified, this
-   * attribute overrides the method attribute of the <form> element that owns this
+   * attribute overrides the method attribute of the &lt;form&gt; element that owns this
    * element.
    *
    * MDN
@@ -1515,10 +1537,11 @@ abstract class HTMLButtonElement extends HTMLElement {
 /**
  * The HTMLSourceElement interface provides special properties (beyond the
  * regular HTMLElement object interface it also has available to it by inheritance)
- * for manipulating <source> elements.
+ * for manipulating &lt;source&gt; elements.
  *
  * MDN
  */
+@js.native
 abstract class HTMLSourceElement extends HTMLElement {
   /**
    * Reflects the src HTML attribute, containing the URL for the media resource.
@@ -1540,18 +1563,19 @@ abstract class HTMLSourceElement extends HTMLElement {
  * DOM Script objects expose the HTMLScriptElement (or HTML 4 HTMLScriptElement)
  * interface, which provides special properties and methods (beyond the regular
  * element object interface they also have available to them by inheritance) for
- * manipulating the layout and presentation of <script> elements.
+ * manipulating the layout and presentation of &lt;script&gt; elements.
  *
  * MDN
  */
+@js.native
 abstract class HTMLScriptElement extends HTMLElement {
   var defer: Boolean = js.native
   /**
    * The IDL attribute text must return a concatenation of the contents of all the Text
-   * nodes that are children of the <script> element (ignoring any other nodes such as
+   * nodes that are children of the &lt;script&gt; element (ignoring any other nodes such as
    * comments or elements), in tree order. On setting, it must act the same way as the
    * textContent IDL attribute. Note: When inserted using the document.write()
-   * method, <script> elements execute (typically synchronously), but when inserted
+   * method, &lt;script&gt; elements execute (typically synchronously), but when inserted
    * using innerHTML and outerHTML attributes, they do not execute at all.
    *
    * MDN
@@ -1588,7 +1612,7 @@ abstract class HTMLScriptElement extends HTMLElement {
    * The implementation requirements are therefore by necessity scattered
    * throughout the specification. These algorithms describe the core of this
    * processing, but these algorithms reference and are referenced by the parsing
-   * rules for <script> start and end tags in HTML, in foreign content, and in XML, the
+   * rules for &lt;script&gt; start and end tags in HTML, in foreign content, and in XML, the
    * rules for the document.write() method, the handling of scripting, etc. The defer
    * attribute may be specified even if the async attribute is specified, to cause
    * legacy Web browsers that only support defer (and not async) to fall back to the defer
@@ -1608,6 +1632,7 @@ abstract class HTMLScriptElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLTableRowElement extends HTMLElement with HTMLTableAlignment {
   /**
    * Returns a long value which gives the logical position of the row within the entire
@@ -1668,6 +1693,7 @@ abstract class HTMLTableRowElement extends HTMLElement with HTMLTableAlignment {
  *
  * MDN
  */
+@js.native
 abstract class HTMLHtmlElement extends HTMLElement {
   /**
    * Version of the HTML Document Type Definition (DTD) that governs this document.
@@ -1678,6 +1704,7 @@ abstract class HTMLHtmlElement extends HTMLElement {
   var version: String = js.native
 }
 
+@js.native
 abstract class HTMLFrameElement extends HTMLElement with GetSVGDocument {
   var width: js.Any = js.native
   var scrolling: String = js.native
@@ -1703,11 +1730,12 @@ abstract class HTMLFrameElement extends HTMLElement with GetSVGDocument {
 /**
  * The HTMLQuoteElement interface provides special properties and methods (beyond
  * the regular HTMLElement interface it also has available to it by inheritance) for
- * manipulating quoting elements, like <blockquote> and <q>, but not the <cite>
+ * manipulating quoting elements, like &lt;blockquote&gt; and &lt;q&gt;, but not the &lt;cite&gt;
  * element.
  *
  * MDN
  */
+@js.native
 abstract class HTMLQuoteElement extends HTMLElement {
   var dateTime: String = js.native
   /**
@@ -1726,6 +1754,7 @@ abstract class HTMLQuoteElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLTableHeaderCellElement extends HTMLTableCellElement {
 }
 
@@ -1736,9 +1765,11 @@ abstract class HTMLTableHeaderCellElement extends HTMLTableCellElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLDListElement extends HTMLElement {
 }
 
+@js.native
 abstract class HTMLFrameSetElement extends HTMLElement {
   var ononline: js.Function1[Event, _] = js.native
   var borderColor: js.Any = js.native
@@ -1764,11 +1795,12 @@ abstract class HTMLFrameSetElement extends HTMLElement {
 }
 
 /**
- * The HTMLLabelElement interface gives access to properties specific to <label>
+ * The HTMLLabelElement interface gives access to properties specific to &lt;label&gt;
  * elements. It inherits from HTMLElement.
  *
  * MDN
  */
+@js.native
 abstract class HTMLLabelElement extends HTMLElement {
   /**
    * The ID of the labeled control. Reflects the for attribute.
@@ -1782,17 +1814,19 @@ abstract class HTMLLabelElement extends HTMLElement {
 
 /**
  * The HTMLLegendElement is an interface allowing to access properties of the
- * <legend> elements. It inherits properties and methods from the HTMLElement
+ * &lt;legend&gt; elements. It inherits properties and methods from the HTMLElement
  * interface.
  *
  * MDN
  */
+@js.native
 abstract class HTMLLegendElement extends HTMLElement {
   var align: String = js.native
 
   def form: HTMLFormElement = js.native
 }
 
+@js.native
 abstract class HTMLDirectoryElement extends HTMLElement {
 }
 
@@ -1803,11 +1837,12 @@ abstract class HTMLDirectoryElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLLIElement extends HTMLElement {
   /**
-   * Indicates the ordinal position of the list element inside a given <ol>. It reflects
-   * the value attribute of the HTML <li> element, and can be smaller than 0. If the <li>
-   * element is not a child of an <ol> element, the property has no meaning.
+   * Indicates the ordinal position of the list element inside a given &lt;ol&gt;. It reflects
+   * the value attribute of the HTML &lt;li&gt; element, and can be smaller than 0. If the &lt;li&gt;
+   * element is not a child of an &lt;ol&gt; element, the property has no meaning.
    *
    * MDN
    */
@@ -1822,6 +1857,7 @@ abstract class HTMLLIElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLIFrameElement extends HTMLElement with GetSVGDocument {
   /**
    * Reflects the width HTML attribute, indicating the width of the frame.
@@ -1891,6 +1927,7 @@ abstract class HTMLIFrameElement extends HTMLElement with GetSVGDocument {
  *
  * MDN
  */
+@js.native
 abstract class HTMLBodyElement extends HTMLElement {
   var scroll: String = js.native
   /**
@@ -2008,6 +2045,7 @@ abstract class HTMLBodyElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLTableSectionElement extends HTMLElement with HTMLTableAlignment {
   /**
    * Is a DOMString containing an enumerated value reflecting the align attribute. It
@@ -2048,6 +2086,7 @@ abstract class HTMLTableSectionElement extends HTMLElement with HTMLTableAlignme
  *
  * MDN
  */
+@js.native
 abstract class HTMLInputElement extends HTMLElement {
   /**
    * Reflects the width HTML attribute, which defines the width of the image displayed
@@ -2060,9 +2099,9 @@ abstract class HTMLInputElement extends HTMLElement {
 
   /**
    * The containing form element, if this element is in a form. If this element is not
-   * contained in a form element: HTML5 this can be the id attribute of any <form> element
-   * in the same document. Even if the attribute is set on <input>, this property will be
-   * null, if it isn't the id of a <form> element. HTML 4 this must be null.
+   * contained in a form element: HTML5 this can be the id attribute of any &lt;form&gt; element
+   * in the same document. Even if the attribute is set on &lt;input&gt;, this property will be
+   * null, if it isn't the id of a &lt;form&gt; element. HTML 4 this must be null.
    *
    * MDN
    */
@@ -2175,7 +2214,7 @@ abstract class HTMLInputElement extends HTMLElement {
   var maxLength: Int = js.native
   /**
    * Reflects the type HTML attribute, indicating the type of control to display.
-   * See type attribute of <input> for possible values.
+   * See type attribute of &lt;input&gt; for possible values.
    */
   var `type`: String = js.native
   /**
@@ -2224,7 +2263,7 @@ abstract class HTMLInputElement extends HTMLElement {
   /**
    * Reflects the formtarget HTML attribute, containing a name or keyword indicating
    * where to display the response that is received after submitting the form. If
-   * specified, this attribute overrides the target attribute of the <form> element
+   * specified, this attribute overrides the target attribute of the &lt;form&gt; element
    * that owns this element.
    *
    * MDN
@@ -2266,7 +2305,7 @@ abstract class HTMLInputElement extends HTMLElement {
   /**
    * Reflects the formenctype HTML attribute, containing the type of content that
    * is used to submit the form to the server. If specified, this attribute
-   * overrides the enctype attribute of the <form> element that owns this element.
+   * overrides the enctype attribute of the &lt;form&gt; element that owns this element.
    *
    * MDN
    */
@@ -2290,14 +2329,14 @@ abstract class HTMLInputElement extends HTMLElement {
   /**
    * Reflects the formmethod HTML attribute, containing the HTTP method that the
    * browser uses to submit the form. If specified, this attribute overrides the method
-   * attribute of the <form> element that owns this element.
+   * attribute of the &lt;form&gt; element that owns this element.
    *
    * MDN
    */
   var formMethod: String = js.native
   /**
    * Identifies a list of pre-defined options to suggest to the user. The value must be
-   * the id of a <datalist> element in the same document. The browser displays only
+   * the id of a &lt;datalist&gt; element in the same document. The browser displays only
    * options that are valid values for this input element. This attribute is ignored
    * when the type attribute's value is hidden, checkbox, radio, file, or a button type.
    *
@@ -2328,7 +2367,7 @@ abstract class HTMLInputElement extends HTMLElement {
   /**
    * Reflects the formaction HTML attribute, containing the URI of a program that
    * processes information submitted by the element. If specified, this attribute
-   * overrides the action attribute of the <form> element that owns this element.
+   * overrides the action attribute of the &lt;form&gt; element that owns this element.
    *
    * MDN
    */
@@ -2352,7 +2391,7 @@ abstract class HTMLInputElement extends HTMLElement {
   /**
    * Reflects the formnovalidate HTML attribute, indicating that the form is not to
    * be validated when it is submitted. If specified, this attribute overrides the
-   * novalidate attribute of the <form> element that owns this element.
+   * novalidate attribute of the &lt;form&gt; element that owns this element.
    *
    * MDN
    */
@@ -2412,6 +2451,7 @@ abstract class HTMLInputElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLAnchorElement extends HTMLElement {
   /**
    * Is a DOMString that reflects the rel HTML attribute, specifying the relationship
@@ -2534,12 +2574,13 @@ abstract class HTMLAnchorElement extends HTMLElement {
 
 /**
  * The HTMLParamElement interface provides special properties (beyond those of the
- * regular HTMLElement object interface it inherits) for manipulating <param>
+ * regular HTMLElement object interface it inherits) for manipulating &lt;param&gt;
  * elements, representing a pair of a key and a value that acts as a parameter for an
- * <object> element.
+ * &lt;object&gt; element.
  *
  * MDN
  */
+@js.native
 abstract class HTMLParamElement extends HTMLElement {
   /**
    * Is a DOMString representing the value associated to the parameter. It reflects the
@@ -2578,10 +2619,11 @@ abstract class HTMLParamElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLPreElement extends HTMLElement {
   /**
    * Is a long value reflecting the obsolete width attribute, containing a fixed-size
-   * length for the <pre> element.
+   * length for the &lt;pre&gt; element.
    *
    * MDN
    */
@@ -2589,6 +2631,7 @@ abstract class HTMLPreElement extends HTMLElement {
 }
 
 
+@js.native
 abstract class HTMLPhraseElement extends HTMLElement {
   var dateTime: String = js.native
 }
@@ -2602,6 +2645,7 @@ abstract class HTMLPhraseElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLCanvasElement extends HTMLElement {
   /**
    * Reflects the width HTML attribute, specifying the width of the coordinate space in
@@ -2652,6 +2696,7 @@ abstract class HTMLCanvasElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLTitleElement extends HTMLElement {
   /**
    * DOMString representing the text of the document's title.
@@ -2663,11 +2708,12 @@ abstract class HTMLTitleElement extends HTMLElement {
 
 
 /**
- * The HTMLStyleElement interface represents a <style> element. It inherits
+ * The HTMLStyleElement interface represents a &lt;style&gt; element. It inherits
  * properties and methods from its parent, HTMLElement, and from LinkStyle.
  *
  * MDN
  */
+@js.native
 abstract class HTMLStyleElement extends HTMLElement with LinkStyle {
   /**
    * Is a DOMString representing the intended destination medium for style
@@ -2692,17 +2738,19 @@ abstract class HTMLStyleElement extends HTMLElement with LinkStyle {
  *
  * MDN
  */
+@js.native
 abstract class HTMLUnknownElement extends HTMLElement {
 }
 
 
 /**
- * The HTMLAudioElement interface provides access to the properties of <audio>
+ * The HTMLAudioElement interface provides access to the properties of &lt;audio&gt;
  * elements, as well as methods to manipulate them. It derives from the
  * HTMLMediaElement interface.
  *
  * MDN
  */
+@js.native
 abstract class HTMLAudioElement extends HTMLMediaElement {
 }
 
@@ -2715,6 +2763,7 @@ abstract class HTMLAudioElement extends HTMLMediaElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLTableCellElement extends HTMLElement with HTMLTableAlignment {
   /**
    * Is a DOMString containing a length of pixel of the hinted width of the cell. It
@@ -2724,15 +2773,15 @@ abstract class HTMLTableCellElement extends HTMLElement with HTMLTableAlignment 
    */
   var width: Int = js.native
   /**
-   * Is a DOMSettableTokenList describing a list of id of <th> elements that represents
+   * Is a DOMSettableTokenList describing a list of id of &lt;th&gt; elements that represents
    * headers associated with the cell. It reflects the headers attribute.
    *
    * MDN
    */
   var headers: String = js.native
   /**
-   * Is a long representing the cell position in the cells collection of the <tr> it
-   * belongs to. If the cell doesn't belong to a <tr>, it returns -1.
+   * Is a long representing the cell position in the cells collection of the &lt;tr&gt; it
+   * belongs to. If the cell doesn't belong to a &lt;tr&gt;, it returns -1.
    *
    * MDN
    */
@@ -2791,10 +2840,11 @@ abstract class HTMLTableCellElement extends HTMLElement with HTMLTableAlignment 
 /**
  * The HTMLBaseFontElement interface provides special properties (beyond the
  * regular HTMLElement interface it also has available to it by inheritance) for
- * manipulating <basefont> elements.
+ * manipulating &lt;basefont&gt; elements.
  *
  * MDN
  */
+@js.native
 abstract class HTMLBaseFontElement extends HTMLElement {
   /**
    * Is a DOMString representing a list of one or more font names. The document text in the
@@ -2819,11 +2869,12 @@ abstract class HTMLBaseFontElement extends HTMLElement {
 /**
  * The HTMLTextAreaElement interface, which provides special properties and
  * methods (beyond the regular HTMLElement interface it also has available to it by
- * inheritance) for manipulating the layout and presentation of <textarea>
+ * inheritance) for manipulating the layout and presentation of &lt;textarea&gt;
  * elements.
  *
  * MDN
  */
+@js.native
 abstract class HTMLTextAreaElement extends HTMLElement {
   /**
    * The raw value contained in the control.
@@ -2834,7 +2885,7 @@ abstract class HTMLTextAreaElement extends HTMLElement {
   var status: js.Any = js.native
   /**
    * The containing form element, if this element is in a form. If this element is not
-   * contained in a form element, it can be the id attribute of any <form> element in the
+   * contained in a form element, it can be the id attribute of any &lt;form&gt; element in the
    * same document or the value null.
    *
    * MDN
@@ -2996,10 +3047,11 @@ abstract class HTMLTextAreaElement extends HTMLElement {
  * The HTMLModElement interface provides special properties (beyond the regular
  * methods and properties available through the HTMLElement interface they also
  * have available to them by inheritance) for manipulating modification elements,
- * that is <del> and <ins>.
+ * that is &lt;del&gt; and &lt;ins&gt;.
  *
  * MDN
  */
+@js.native
 abstract class HTMLModElement extends HTMLElement {
   var dateTime: String = js.native
   /**
@@ -3019,6 +3071,7 @@ abstract class HTMLModElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLTableColElement extends HTMLElement with HTMLTableAlignment {
   var width: js.Any = js.native
   /**
@@ -3037,6 +3090,7 @@ abstract class HTMLTableColElement extends HTMLElement with HTMLTableAlignment {
 }
 
 
+@js.native
 trait HTMLTableAlignment extends js.Object {
   var ch: String = js.native
   var vAlign: String = js.native
@@ -3050,6 +3104,7 @@ trait HTMLTableAlignment extends js.Object {
  *
  * MDN
  */
+@js.native
 abstract class HTMLUListElement extends HTMLElement {
 }
 
@@ -3061,6 +3116,7 @@ abstract class HTMLUListElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLDivElement extends HTMLElement {
   /**
    * Enumerated property indicating alignment of the element's contents with respect
@@ -3075,11 +3131,12 @@ abstract class HTMLDivElement extends HTMLElement {
 
 
 /**
- * The HTMLBRElement interface represents a HTML line break element (<br>). It
+ * The HTMLBRElement interface represents a HTML line break element (&lt;br&gt;). It
  * inherits from HTMLElement.
  *
  * MDN
  */
+@js.native
 abstract class HTMLBRElement extends HTMLElement {
   /**
    * Indicates flow of text around floating objects.
@@ -3097,6 +3154,7 @@ abstract class HTMLBRElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLMediaElement extends HTMLElement {
   /**
    * The initial playback position in seconds.
@@ -3292,6 +3350,7 @@ abstract class HTMLMediaElement extends HTMLElement {
   var audioTracks: AudioTrackList = js.native
 }
 
+@js.native
 object HTMLMediaElement extends js.Object {
   /* ??? ConstructorMember(FunSignature(List(),List(),Some(TypeRef(TypeName(HTMLMediaElement),List())))) */
   /**
@@ -3340,6 +3399,7 @@ object HTMLMediaElement extends js.Object {
   val HAVE_FUTURE_DATA: Int = js.native
 }
 
+@js.native
 abstract class HTMLDTElement extends HTMLElement {
   var noWrap: Boolean = js.native
 }
@@ -3352,6 +3412,7 @@ abstract class HTMLDTElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLFieldSetElement extends HTMLElement {
   var align: String = js.native
 
@@ -3381,7 +3442,7 @@ abstract class HTMLFieldSetElement extends HTMLElement {
    */
   var validity: ValidityState = js.native
   /**
-   * Always false because <fieldset> objects are never candidates for constraint
+   * Always false because &lt;fieldset&gt; objects are never candidates for constraint
    * validation.
    *
    * MDN
@@ -3389,7 +3450,7 @@ abstract class HTMLFieldSetElement extends HTMLElement {
   var willValidate: Boolean = js.native
 
   /**
-   * Always returns true because <fieldset> objects are never candidates for
+   * Always returns true because &lt;fieldset&gt; objects are never candidates for
    * constraint validation.
    *
    * MDN
@@ -3407,6 +3468,7 @@ abstract class HTMLFieldSetElement extends HTMLElement {
 }
 
 
+@js.native
 abstract class HTMLBGSoundElement extends HTMLElement {
   var balance: js.Any = js.native
   var volume: js.Any = js.native
@@ -3421,6 +3483,7 @@ abstract class HTMLBGSoundElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLElement extends Element {
   var onblur: js.Function1[FocusEvent, _] = js.native
   var onfocus: js.Function1[FocusEvent, _] = js.native
@@ -3652,10 +3715,11 @@ abstract class HTMLElement extends Element {
 /**
  * The HTMLHRElement interface provides special properties (beyond those of the
  * HTMLElement interface it also has available to it by inheritance) for
- * manipulating <hr> elements.
+ * manipulating &lt;hr&gt; elements.
  *
  * MDN
  */
+@js.native
 abstract class HTMLHRElement extends HTMLElement {
   var width: Double = js.native
   /**
@@ -3672,11 +3736,12 @@ abstract class HTMLHRElement extends HTMLElement {
 /**
  * The HTMLObjectElement interface provides special properties and methods
  * (beyond those on the HTMLElement interface it also has available to it by
- * inheritance) for manipulating the layout and presentation of <object> element,
+ * inheritance) for manipulating the layout and presentation of &lt;object&gt; element,
  * representing external resources.
  *
  * MDN
  */
+@js.native
 abstract class HTMLObjectElement extends HTMLElement with GetSVGDocument {
   /**
    * Reflects the width HTML attribute, specifying the displayed width of the resource
@@ -3729,7 +3794,7 @@ abstract class HTMLObjectElement extends HTMLElement with GetSVGDocument {
    */
   var name: String = js.native
   /**
-   * Reflects the usemap HTML attribute, specifying a <map> element to use.
+   * Reflects the usemap HTML attribute, specifying a &lt;map&gt; element to use.
    *
    * MDN
    */
@@ -3817,11 +3882,12 @@ abstract class HTMLObjectElement extends HTMLElement with GetSVGDocument {
 
 /**
  * The HTMLEmbedElement interface, which provides special properties (beyond the
- * regular <htmlelement> interface it also has available to it by inheritance) for
- * manipulating <embed> elements.
+ * regular &lt;htmlelement&gt; interface it also has available to it by inheritance) for
+ * manipulating &lt;embed&gt; elements.
  *
  * MDN
  */
+@js.native
 abstract class HTMLEmbedElement extends HTMLElement with GetSVGDocument {
   /**
    * Reflects the width HTML attribute, containing the displayed width of the
@@ -3852,11 +3918,12 @@ abstract class HTMLEmbedElement extends HTMLElement with GetSVGDocument {
 /**
  * The HTMLOptGroupElement interface provides special properties and methods
  * (beyond the regular HTMLElement object interface they also have available to them
- * by inheritance) for manipulating the layout and presentation of <optgroup>
+ * by inheritance) for manipulating the layout and presentation of &lt;optgroup&gt;
  * elements.
  *
  * MDN
  */
+@js.native
 abstract class HTMLOptGroupElement extends HTMLElement {
 
   /**
@@ -3872,14 +3939,15 @@ abstract class HTMLOptGroupElement extends HTMLElement {
 /**
  * The HTMLIsIndexElement interface provides special properties (beyond the
  * regular HTMLElement interface it also has available to it by inheritance) for
- * manipulating <isindex> elements.
+ * manipulating &lt;isindex&gt; elements.
  *
  * MDN
  */
+@js.native
 abstract class HTMLIsIndexElement extends HTMLElement {
   /**
-   * Is a HTMLFormElement representing the <form> element it belongs too. It can have
-   * the null value, if <isindex> isn't part of any form.
+   * Is a HTMLFormElement representing the &lt;form&gt; element it belongs too. It can have
+   * the null value, if &lt;isindex&gt; isn't part of any form.
    *
    * MDN
    */
@@ -3901,6 +3969,7 @@ abstract class HTMLIsIndexElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLVideoElement extends HTMLMediaElement {
   /**
    * Is a DOMString that reflects the width HTML attribute, which specifies the width of
@@ -3949,11 +4018,12 @@ abstract class HTMLVideoElement extends HTMLMediaElement {
 /**
  * The HTMLProgressElement interface provides special properties and methods
  * (beyond the regular HTMLElement interface it also has available to it by
- * inheritance) for manipulating the layout and presentation of <progress>
+ * inheritance) for manipulating the layout and presentation of &lt;progress&gt;
  * elements.
  *
  * MDN
  */
+@js.native
 abstract class HTMLProgressElement extends HTMLElement {
   /**
    * If the progress bar is an indeterminate progress bar, then this property return 0.
@@ -3984,10 +4054,11 @@ abstract class HTMLProgressElement extends HTMLElement {
 /**
  * The HTMLDataListElement interface provides special properties (beyond the
  * HTMLElement object interface it also has available to it by inheritance) to
- * manipulate <datalist> elements and their content.
+ * manipulate &lt;datalist&gt; elements and their content.
  *
  * MDN
  */
+@js.native
 abstract class HTMLDataListElement extends HTMLElement {
   /**
    * A collection of the contained option elements.
@@ -3999,11 +4070,12 @@ abstract class HTMLDataListElement extends HTMLElement {
 
 
 /**
- * The HTMLTrackElement interface provides access to the properties of <track>
+ * The HTMLTrackElement interface provides access to the properties of &lt;track&gt;
  * elements, as well as methods to manipulate them.
  *
  * MDN
  */
+@js.native
 abstract class HTMLTrackElement extends HTMLElement {
   var kind: String = js.native
   var src: String = js.native
@@ -4012,6 +4084,7 @@ abstract class HTMLTrackElement extends HTMLElement {
   var label: String = js.native
 }
 
+@js.native
 abstract class HTMLMarqueeElement extends HTMLElement {
   var width: String = js.native
   var onbounce: js.Function1[Event, _] = js.native
@@ -4035,12 +4108,13 @@ abstract class HTMLMarqueeElement extends HTMLElement {
 }
 
 /**
- * The HTMLSpanElement interface represents a <span> element and derives from the
+ * The HTMLSpanElement interface represents a &lt;span&gt; element and derives from the
  * HTMLElement interface, but without implementing any additional properties or
  * methods.
  *
  * MDN
  */
+@js.native
 abstract class HTMLSpanElement extends HTMLElement {
 }
 
@@ -4052,6 +4126,7 @@ abstract class HTMLSpanElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLHeadElement extends HTMLElement {
   /**
    * The URIs of one or more metadata profiles (white space separated).
@@ -4068,6 +4143,7 @@ abstract class HTMLHeadElement extends HTMLElement {
  *
  * MDN
  */
+@js.native
 abstract class HTMLHeadingElement extends HTMLElement {
   /**
    * Enumerated attribute indicating alignment of the heading with respect to the
@@ -4080,11 +4156,12 @@ abstract class HTMLHeadingElement extends HTMLElement {
 
 
 /**
- * The HTMLFormElement interface provides methods to create and modify <form>
+ * The HTMLFormElement interface provides methods to create and modify &lt;form&gt;
  * elements; it inherits from properties and methods of the HTMLElement interface.
  *
  * MDN
  */
+@js.native
 abstract class HTMLFormElement extends HTMLElement {
   /**
    * length returns the number of controls in the FORM element.
@@ -4120,7 +4197,7 @@ abstract class HTMLFormElement extends HTMLElement {
    */
   var elements: HTMLCollection = js.native
   /**
-   * action gets/sets the action of the <form> element.
+   * action gets/sets the action of the &lt;form&gt; element.
    *
    * MDN
    */
@@ -4201,6 +4278,3 @@ abstract class HTMLFormElement extends HTMLElement {
 
   def checkValidity(): Boolean = js.native
 }
-
-
-

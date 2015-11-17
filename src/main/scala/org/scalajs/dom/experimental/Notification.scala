@@ -4,6 +4,7 @@ import org.scalajs.dom.raw.EventTarget
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
+@js.native
 trait NotificationOptions extends js.Object {
   /**
    * The body property of the Notification interface indicates the
@@ -177,6 +178,7 @@ object NotificationOptions {
  *
  * https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API
  */
+@js.native
 object Notification extends js.Object {
   /**
    * The permission read-only property of the Notification interface
@@ -209,8 +211,9 @@ object Notification extends js.Object {
  * MDN
  */
 @JSName("Notification")
-class Notification( title: String,
-
+@js.native
+class Notification(
+    title: String,
     options: NotificationOptions = ???) extends EventTarget {
 
   /**
