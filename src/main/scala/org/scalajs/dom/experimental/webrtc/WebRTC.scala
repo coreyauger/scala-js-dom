@@ -1,6 +1,6 @@
 package org.scalajs.dom.experimental.webrtc
 
-import org.scalajs.dom.raw.{DOMError, Event, EventTarget}
+import org.scalajs.dom.raw.{Promise, DOMError, Event, EventTarget}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
@@ -475,6 +475,71 @@ object RTCIceCandidate {
   }
 }
 
+
+object MediaDevicesInfoKind{
+  val videoinput = "videoinput"
+  val audioinput = "audioinput"
+  val audiooutput = "audiooutput"
+}
+
+@js.native
+trait MediaDevicesInfo extends js.Object{
+
+  /**
+   * Returns a DOMString that is an identifier for the represented device
+   * that is persisted across sessions. It is un-guessable by other
+   * applications and unique to the origin of the calling application. It is
+   * reset when the user clears cookies (for Private Browsing, a different
+   * identifier is used that is not persisted across sessions).
+   *
+   * MDN
+   */
+  val deviceId: String = js.native
+
+  /**
+   * Returns a DOMString that is a group identifier. Two devices have the same
+   * group identifier if they belong to the same physical device; for example
+   * a monitor with both a built-in camera and microphone.
+   *
+   * MDN
+   */
+  val groupId:String = js.native
+
+  /**
+   * enum MediaDevicesInfoKind
+   * Returns an enumerated value that is either "videoinput", "audioinput"
+   * or "audiooutput".
+   *
+   * MDN
+   */
+  val kind:String = js.native
+
+  /**
+   * Returns a DOMString that is a label describing this device (for example
+   * "External USB Webcam"). Only available during active MediaStream use or
+   * when persistent permissions have been granted.
+   *
+   * MDN
+   */
+  val label:String = js.native
+}
+
+object MediaDevicesInfo {
+  def apply(
+             deviceId: js.UndefOr[String] = js.undefined,
+             groupId: js.UndefOr[String] = js.undefined,
+             kind: js.UndefOr[String] = js.undefined,
+             label: js.UndefOr[String] = js.undefined
+             ): MediaDevicesInfo = {
+    val result = js.Dynamic.literal()
+    deviceId.foreach(result.deviceId = _)
+    groupId.foreach(result.groupId = _)
+    kind.foreach(result.kind = _)
+    label.foreach(result.label = _)
+    result.asInstanceOf[MediaDevicesInfo]
+  }
+}
+
 // TODO: ..
 // https://developer.mozilla.org/en-US/docs/Web/API/RTCDataChannel
 trait RTCDataChannel {
@@ -525,9 +590,9 @@ object SignalingState{
  * MDN
  *
  */
-@JSName("RTCPeerConnection")
+@JSName("webkitRTCPeerConnection")
 @js.native
-class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[MediaConstraints] = js.undefined) extends EventTarget {
+class RTCPeerConnection(configuration:js.UndefOr[RTCConfiguration] = js.undefined, constraints:js.UndefOr[MediaConstraints] = js.undefined) extends EventTarget {
 
   //def this(configuration:RTCConfiguration, constraints:js.UndefOr[MediaConstraints] = js.undefined) = this(configuration, constraints)
 
@@ -899,13 +964,9 @@ class RTCPeerConnection(configuration:RTCConfiguration, constraints:js.UndefOr[M
   def getIdentityAssertion(id: js.Any): Unit = js.native
 }
 
-/*
-@js.native
-trait NavigatorGetUserMedia extends js.Object {
-  def getUserMedia(constraints: MediaConstraints, callback:(DOMError, MediaStream) => Unit):Unit = js.native
-}*/
-/*
 
+
+/*
 @JSName("window.navigator")
 @js.native
 object NavigatorGetUserMedia extends js.Object {
@@ -916,5 +977,40 @@ object NavigatorGetUserMedia extends js.Object {
 
   def webkitGetScreenMedia(callback:js.Function1[MediaStream, Any], error:js.Function1[DOMError, Any] ):Unit = js.native
 
+}*/
+
+
+
+/**
+ * ## This is an experimental technology ##
+ * The MediaDevices interface provides access to connected media input devices
+ * like cameras and microphones, as well as screensharing.
+ *
+ * MDN
+ */
+@JSName("window.navigator.mediaDevices")
+@js.native
+object MediaDevices extends js.Object {
+
+  /**
+   * The MediaDevices.getUserMedia() method prompts the user for permission
+   * to use one video and/or one audio input device such as a camera or
+   * screensharing and/or a microphone. If the user provides permission, then
+   * the returned Promise is resolved with the resulting MediaStream object.
+   * If the user denies permission, or media is not available, then the promise
+   * is rejected with PermissionDeniedError or NotFoundError respectively. Note
+   * that it is possible for the returned promise to neither resolve nor
+   * reject, as the user is not required to make a choice.
+   *
+   * MDN
+   */
+  def getUserMedia(constraints: MediaConstraints): Promise[MediaStream] = js.native
+
+  /**
+   * The MediaDevices.enumeratedDevices() method collects information about
+   * the media input and output devices available on the system.
+   *
+   * MDN
+   */
+  def enumerateDevices(): Promise[MediaDevicesInfo] = js.native
 }
-*/
