@@ -443,7 +443,7 @@ object RTCSessionDescription{
     val result = js.Dynamic.literal()
     `type`.foreach(result.`type` = _)
     sdp.foreach(result.sdp = _)
-    result.asInstanceOf[RTCSessionDescription]
+    new RTCSessionDescription(result)
   }
 }
 
@@ -454,8 +454,9 @@ object RTCSdpType{
   val rollback = "rollback"
 }
 
+@JSName("RTCIceCandidate")
 @js.native
-trait RTCIceCandidate extends js.Object{
+class RTCIceCandidate(options: js.Dynamic) extends js.Object {
   var candidate: String = js.native
   var sdpMLineIndex: Int = js.native
   var sdpMid:String = js.native
@@ -471,7 +472,7 @@ object RTCIceCandidate {
     candidate.foreach(result.candidate = _)
     sdpMLineIndex.foreach(result.sdpMLineIndex = _)
     sdpMid.foreach(result.sdpMid = _)
-    result.asInstanceOf[RTCIceCandidate]
+    new RTCIceCandidate(result)
   }
 }
 
