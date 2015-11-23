@@ -1,7 +1,6 @@
 package org.scalajs.dom.experimental.webrtc
 
 import org.scalajs.dom.raw.{Promise, DOMError, Event, EventTarget}
-
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
@@ -94,7 +93,7 @@ trait MediaStreamTrack extends EventTarget{
    *
    * MDN
    */
-  val onstarted: js.Function0[Any] = js.native
+  var onstarted: js.Function1[Event, Any] = js.native
 
   /**
    * Is a EventHandler containing the action to perform when an mute event is
@@ -102,7 +101,7 @@ trait MediaStreamTrack extends EventTarget{
    *
    * MDN
    */
-  val onmute: js.Function0[Any] = js.native
+  var onmute: js.Function1[Event, Any] = js.native
 
   /**
    * Is a EventHandler containing the action to perform when an unmute event
@@ -111,7 +110,7 @@ trait MediaStreamTrack extends EventTarget{
    *
    * MDN
    */
-  val onunmute: js.Function0[Any] = js.native
+  var onunmute: js.Function1[Event, Any] = js.native
 
   /**
    * Is a EventHandler containing the action to perform when an overconstrained
@@ -120,7 +119,7 @@ trait MediaStreamTrack extends EventTarget{
    *
    * MDN
    */
-  val onoverconstrained: js.Function0[Any] = js.native
+  var onoverconstrained: js.Function1[Event, Any] = js.native
 
   /**
    * Is a EventHandler containing the action to perform when an ended event is
@@ -129,7 +128,7 @@ trait MediaStreamTrack extends EventTarget{
    *
    * MDN
    */
-  val oneended: js.Function0[Any] = js.native
+  var oneended: js.Function1[Event, Any] = js.native
 
   def getConstraints(): Unit = js.native
 
@@ -154,7 +153,6 @@ class MediaStreamEvent(`type`:String, ms:js.Dictionary[js.Any] ) extends Event{
   val stream: MediaStream = js.native
 }
 
-
 object MediaStreamTrack{
 
   object kind{
@@ -168,19 +166,19 @@ object MediaStreamTrack{
   }
 
   def apply(
-     enabled: js.UndefOr[Boolean] = js.undefined,
-     id: js.UndefOr[String] = js.undefined,
-     kind: js.UndefOr[String] = js.undefined,
-     label: js.UndefOr[String] = js.undefined,
-     muted: js.UndefOr[Boolean] = js.undefined,
-     readonly: js.UndefOr[Boolean] = js.undefined,
-     readyState: js.UndefOr[String] = js.undefined,
-     remote: js.UndefOr[Boolean] = js.undefined,
-     onstarted: js.UndefOr[js.Function0[Any]] = js.undefined,
-     onmute: js.UndefOr[js.Function0[Any]] = js.undefined,
-     onunmute: js.UndefOr[js.Function0[Any]] = js.undefined,
-     onoverconstrained: js.UndefOr[js.Function0[Any]] = js.undefined,
-     oneended: js.UndefOr[js.Function0[Any]] = js.undefined):MediaStreamTrack = {
+      enabled: js.UndefOr[Boolean] = js.undefined,
+      id: js.UndefOr[String] = js.undefined,
+      kind: js.UndefOr[String] = js.undefined,
+      label: js.UndefOr[String] = js.undefined,
+      muted: js.UndefOr[Boolean] = js.undefined,
+      readonly: js.UndefOr[Boolean] = js.undefined,
+      readyState: js.UndefOr[String] = js.undefined,
+      remote: js.UndefOr[Boolean] = js.undefined,
+      onstarted: js.UndefOr[js.Function0[Any]] = js.undefined,
+      onmute: js.UndefOr[js.Function0[Any]] = js.undefined,
+      onunmute: js.UndefOr[js.Function0[Any]] = js.undefined,
+      onoverconstrained: js.UndefOr[js.Function0[Any]] = js.undefined,
+      oneended: js.UndefOr[js.Function0[Any]] = js.undefined):MediaStreamTrack = {
     val result = js.Dynamic.literal()
     enabled.foreach(result.enabled = _)
     id.foreach(result.id = _)
@@ -239,7 +237,7 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  var onactive: js.Function0[Any] = js.native
+  var onactive: js.Function1[Event, Any] = js.native
 
   /**
    * Is an EventHandler containing the action to perform when an addtrack event
@@ -247,7 +245,7 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  var onaddtrack: js.Function0[Any] = js.native
+  var onaddtrack: js.Function1[Event, Any] = js.native
 
   /**
    * Is an EventHandler containing the action to perform when an inactive event
@@ -255,7 +253,7 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  val oninactive: js.Function0[Any] = js.native
+  var oninactive: js.Function1[Event,Any] = js.native
 
   /**
    * Is an EventHandler containing the action to perform when an removetrack
@@ -263,7 +261,7 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  var onremovetrack: js.Function0[Any] = js.native
+  var onremovetrack: js.Function1[Event, Any] = js.native
 
   /**
    * Stores a copy of the MediaStreamTrack given as argument. If the track has
@@ -334,9 +332,8 @@ trait RTCIdentityAssertion extends js.Object{
 
 object RTCIdentityAssertion{
   def apply(
-     idp: js.UndefOr[String] = js.undefined,
-     name: js.UndefOr[String] = js.undefined
-     ):RTCIdentityAssertion ={
+      idp: js.UndefOr[String] = js.undefined,
+      name: js.UndefOr[String] = js.undefined):RTCIdentityAssertion ={
     val result = js.Dynamic.literal()
     idp.foreach(result.idp = _)
     name.foreach(result.name = _)
@@ -354,11 +351,10 @@ trait MediaConstraints extends js.Object{
 
 object MediaConstraints {
   def apply(
-             video: js.UndefOr[Boolean] = js.undefined,
-             audio: js.UndefOr[Boolean] = js.undefined,
-             optional: js.UndefOr[js.Array[js.Dynamic]] = js.undefined,
-             mandatory: js.UndefOr[js.Dynamic] = js.undefined
-             ): MediaConstraints = {
+      video: js.UndefOr[Boolean] = js.undefined,
+      audio: js.UndefOr[Boolean] = js.undefined,
+      optional: js.UndefOr[js.Array[js.Dynamic]] = js.undefined,
+      mandatory: js.UndefOr[js.Dynamic] = js.undefined): MediaConstraints = {
     val result = js.Dynamic.literal()
     video.foreach(result.video = _)
     audio.foreach(result.audio = _)
@@ -377,10 +373,9 @@ trait RTCIceServer extends js.Object{
 
 object RTCIceServer{
   def apply(
-             url: js.UndefOr[String] = js.undefined,
-             username: js.UndefOr[String] = js.undefined,
-             credential: js.UndefOr[String] = js.undefined
-             ): RTCIceServer = {
+      url: js.UndefOr[String] = js.undefined,
+      username: js.UndefOr[String] = js.undefined,
+      credential: js.UndefOr[String] = js.undefined): RTCIceServer = {
     val result = js.Dynamic.literal()
     url.foreach(result.url = _)
     username.foreach(result.username = _)
@@ -396,8 +391,7 @@ trait RTCConfiguration extends js.Object{
 
 object RTCConfiguration {
   def apply(
-             iceServers: js.UndefOr[js.Array[RTCIceServer]] = js.undefined
-             ): RTCConfiguration = {
+      iceServers: js.UndefOr[js.Array[RTCIceServer]] = js.undefined): RTCConfiguration = {
     val result = js.Dynamic.literal()
     iceServers.foreach(result.iceServers = _)
     result.asInstanceOf[RTCConfiguration]
@@ -444,9 +438,8 @@ class RTCSessionDescription(options: js.Dynamic) extends js.Object {
 
 object RTCSessionDescription{
   def apply(
-     `type`: js.UndefOr[String] = js.undefined,
-     sdp:   js.UndefOr[String] = js.undefined
-  ): RTCSessionDescription = {
+      `type`: js.UndefOr[String] = js.undefined,
+      sdp:   js.UndefOr[String] = js.undefined): RTCSessionDescription = {
     val result = js.Dynamic.literal()
     `type`.foreach(result.`type` = _)
     sdp.foreach(result.sdp = _)
@@ -471,10 +464,9 @@ class RTCIceCandidate(builder: js.Dynamic) extends js.Object {
 
 object RTCIceCandidate {
   def apply(
-     candidate: js.UndefOr[String] = js.undefined,
-     sdpMLineIndex: js.UndefOr[Int] = js.undefined,
-     sdpMid: js.UndefOr[String] = js.undefined
-     ): RTCIceCandidate = {
+      candidate: js.UndefOr[String] = js.undefined,
+      sdpMLineIndex: js.UndefOr[Int] = js.undefined,
+      sdpMid: js.UndefOr[String] = js.undefined): RTCIceCandidate = {
     val result = js.Dynamic.literal()
     candidate.foreach(result.candidate = _)
     sdpMLineIndex.foreach(result.sdpMLineIndex = _)
@@ -482,7 +474,6 @@ object RTCIceCandidate {
     new RTCIceCandidate(result)
   }
 }
-
 
 object MediaDevicesInfoKind{
   val videoinput = "videoinput"
@@ -534,11 +525,10 @@ trait MediaDevicesInfo extends js.Object{
 
 object MediaDevicesInfo {
   def apply(
-             deviceId: js.UndefOr[String] = js.undefined,
-             groupId: js.UndefOr[String] = js.undefined,
-             kind: js.UndefOr[String] = js.undefined,
-             label: js.UndefOr[String] = js.undefined
-             ): MediaDevicesInfo = {
+      deviceId: js.UndefOr[String] = js.undefined,
+      groupId: js.UndefOr[String] = js.undefined,
+      kind: js.UndefOr[String] = js.undefined,
+      label: js.UndefOr[String] = js.undefined): MediaDevicesInfo = {
     val result = js.Dynamic.literal()
     deviceId.foreach(result.deviceId = _)
     groupId.foreach(result.groupId = _)
@@ -600,10 +590,9 @@ object SignalingState{
  */
 @JSName("webkitRTCPeerConnection")
 @js.native
-class RTCPeerConnection(configuration:js.UndefOr[RTCConfiguration] = js.undefined, constraints:js.UndefOr[MediaConstraints] = js.undefined) extends EventTarget {
-
-  //def this(configuration:RTCConfiguration, constraints:js.UndefOr[MediaConstraints] = js.undefined) = this(configuration, constraints)
-
+class RTCPeerConnection(
+    configuration:js.UndefOr[RTCConfiguration] = js.undefined,
+    constraints:js.UndefOr[MediaConstraints] = js.undefined) extends EventTarget {
   /**
    * READONLY Returns an enum of type RTCIceConnectionState that describes the
    * ICE connection state for the connection. When this value changes, a
@@ -796,7 +785,7 @@ class RTCPeerConnection(configuration:js.UndefOr[RTCConfiguration] = js.undefine
    *
    * MDN
    */
-  var onremovestream: js.Function1[Event, Any] = js.native
+  var onremovestream: js.Function1[MediaStreamEvent, Any] = js.native
 
   /**
    * Is the event handler called when the signalingstatechange event, sent when
@@ -814,7 +803,10 @@ class RTCPeerConnection(configuration:js.UndefOr[RTCConfiguration] = js.undefine
    *
    * MDN
    */
-  def createOffer(success:js.Function1[RTCSessionDescription, Any], error:js.Function1[DOMError, Any], options:js.UndefOr[MediaConstraints] = js.undefined): Unit = js.native
+  def createOffer(
+      success:js.Function1[RTCSessionDescription, Any],
+      error:js.Function1[DOMError, Any],
+      options:js.UndefOr[MediaConstraints] = js.undefined): Unit = js.native
 
   /**
    * Creates an answer to the offer received by the remote peer, in a two-part
@@ -824,7 +816,10 @@ class RTCPeerConnection(configuration:js.UndefOr[RTCConfiguration] = js.undefine
    *
    * MDN
    */
-  def createAnswer(success:js.Function1[RTCSessionDescription, Any], error:js.Function1[DOMError, Any], options:js.UndefOr[MediaConstraints] = js.undefined): Unit = js.native
+  def createAnswer(
+      success:js.Function1[RTCSessionDescription, Any],
+      error:js.Function1[DOMError, Any],
+      options:js.UndefOr[MediaConstraints] = js.undefined): Unit = js.native
 
   /**
    * Changes the local description associated with the connection. The
@@ -836,7 +831,10 @@ class RTCPeerConnection(configuration:js.UndefOr[RTCConfiguration] = js.undefine
    *
    * MDN
    */
-  def setLocalDescription(description:RTCSessionDescription, success:js.Function0[Any], error:js.Function1[DOMError,Any]): Unit = js.native
+  def setLocalDescription(
+      description:RTCSessionDescription,
+      success:js.Function0[Any],
+      error:js.Function1[DOMError,Any]): Unit = js.native
 
   /**
    * Changes the remote description associated with the connection. The
@@ -848,7 +846,10 @@ class RTCPeerConnection(configuration:js.UndefOr[RTCConfiguration] = js.undefine
    *
    * MDN
    */
-  def setRemoteDescription(description:RTCSessionDescription, success:js.Function0[Any], error:js.Function1[DOMError,Any]): Unit = js.native
+  def setRemoteDescription(
+      description:RTCSessionDescription,
+      success:js.Function0[Any],
+      error:js.Function1[DOMError,Any]): Unit = js.native
 
   /**
    * The updateIce method updates the ICE Agent process of gathering local
@@ -862,7 +863,9 @@ class RTCPeerConnection(configuration:js.UndefOr[RTCConfiguration] = js.undefine
    *
    * MDN
    */
-  def updateIce(configuration: js.UndefOr[RTCConfiguration] = js.undefined, constraints: js.UndefOr[MediaConstraints] = js.undefined): Unit = js.native
+  def updateIce(
+      configuration: js.UndefOr[RTCConfiguration] = js.undefined,
+      constraints: js.UndefOr[MediaConstraints] = js.undefined): Unit = js.native
 
   /**
    * The addIceCandidate() method provides a remote candidate to the ICE Agent.
@@ -874,7 +877,9 @@ class RTCPeerConnection(configuration:js.UndefOr[RTCConfiguration] = js.undefine
    *
    * MDN
    */
-  def addIceCandidate(candidate:RTCIceCandidate, success:js.Function0[Any], error:js.Function1[DOMError, Any]): Unit = js.native
+  def addIceCandidate(
+      candidate:RTCIceCandidate, success:js.Function0[Any],
+      error:js.Function1[DOMError, Any]): Unit = js.native
 
   def getConfiguration(): RTCConfiguration = js.native
 
@@ -934,7 +939,9 @@ class RTCPeerConnection(configuration:js.UndefOr[RTCConfiguration] = js.undefine
    *
    * MDN
    */
-  def createDataChannel(label:String, options:js.UndefOr[RTCDataChannelInit] = js.undefined): RTCDataChannel = js.native
+  def createDataChannel(
+      label:String,
+      options:js.UndefOr[RTCDataChannelInit] = js.undefined): RTCDataChannel = js.native
 
   /**
    * Creates a new RTCDTMFSender, associated to a specific MediaStreamTrack,
@@ -971,23 +978,6 @@ class RTCPeerConnection(configuration:js.UndefOr[RTCConfiguration] = js.undefine
    */
   def getIdentityAssertion(id: js.Any): Unit = js.native
 }
-
-
-
-/*
-@JSName("window.navigator")
-@js.native
-object NavigatorGetUserMedia extends js.Object {
-
-  def getUserMedia(constraints: MediaConstraints, callback:js.Function1[MediaStream, Any], error:js.Function1[DOMError, Any] ):Unit = js.native
-
-  def webkitGetUserMedia(constraints: MediaConstraints, callback:js.Function1[MediaStream, Any], error:js.Function1[DOMError, Any] ):Unit = js.native
-
-  def webkitGetScreenMedia(callback:js.Function1[MediaStream, Any], error:js.Function1[DOMError, Any] ):Unit = js.native
-
-}*/
-
-
 
 /**
  * ## This is an experimental technology ##
