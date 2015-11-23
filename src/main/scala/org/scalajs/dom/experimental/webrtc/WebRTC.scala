@@ -148,6 +148,13 @@ trait MediaStreamTrack extends EventTarget{
   def stop(): Unit = js.native
 }
 
+@JSName("MediaStreamEvent")
+@js.native
+class MediaStreamEvent(`type`:String, ms:js.Dictionary[js.Any] ) extends Event{
+  val stream: MediaStream = js.native
+}
+
+
 object MediaStreamTrack{
 
   object kind{
@@ -443,7 +450,7 @@ object RTCSessionDescription{
     val result = js.Dynamic.literal()
     `type`.foreach(result.`type` = _)
     sdp.foreach(result.sdp = _)
-    result.asInstanceOf[RTCSessionDescription]
+    new RTCSessionDescription(result)
   }
 }
 
@@ -454,8 +461,9 @@ object RTCSdpType{
   val rollback = "rollback"
 }
 
+@JSName("RTCIceCandidate")
 @js.native
-trait RTCIceCandidate extends js.Object{
+class RTCIceCandidate(builder: js.Dynamic) extends js.Object {
   var candidate: String = js.native
   var sdpMLineIndex: Int = js.native
   var sdpMid:String = js.native
@@ -471,7 +479,7 @@ object RTCIceCandidate {
     candidate.foreach(result.candidate = _)
     sdpMLineIndex.foreach(result.sdpMLineIndex = _)
     sdpMid.foreach(result.sdpMid = _)
-    result.asInstanceOf[RTCIceCandidate]
+    new RTCIceCandidate(result)
   }
 }
 
@@ -711,7 +719,7 @@ class RTCPeerConnection(configuration:js.UndefOr[RTCConfiguration] = js.undefine
    *
    * MDN
    */
-  var onaddstream: js.Function1[Event, Any] = js.native
+  var onaddstream: js.Function1[MediaStreamEvent, Any] = js.native
 
   /**
    * Is the event handler called when the datachannel event is received. Such
