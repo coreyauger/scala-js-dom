@@ -210,8 +210,7 @@ object Notification extends js.Object {
  * @return a new Notification
  * MDN
  */
-
-@JSName("Notification.Notification")
+@JSName("Notification")
 @js.native
 class Notification(
     title: String,
