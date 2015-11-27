@@ -246,6 +246,7 @@ object Ajax {
   /**
    * Supported data formats for Ajax are implicitly converted to InputData
    */
+  @js.native
   sealed trait InputData extends js.Any
 
   object InputData {
@@ -356,15 +357,16 @@ sealed class Storage(domStorage: dom.Storage) {
   def key(index: Int): Option[String] = Option(domStorage.key(index))
 }
 
-object SessionStorage extends Storage(dom.sessionStorage)
+object SessionStorage extends Storage(dom.window.sessionStorage)
 
-object LocalStorage extends Storage(dom.localStorage)
+object LocalStorage extends Storage(dom.window.localStorage)
 
 /**
  * W3C recommendation for touch events
  *
  * @see http://www.w3.org/TR/touch-events/
  */
+@js.native
 trait TouchEvents extends js.Object {
   /**
    * The touchstart event is fired when a touch point is placed on the touch
