@@ -5,7 +5,8 @@ package org.scalajs.dom.experimental.webrtc
 
 import org.scalajs.dom.raw.{Promise, DOMError, Event, EventTarget}
 import scala.scalajs.js
-import org.scalajs.dom.{MediaStreamTrack, MediaStream, MediaStreamEvent}
+import org.scalajs.dom.MediaStream
+import org.scalajs.dom.experimental.mediastream._
 import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.|
 
@@ -858,87 +859,6 @@ class RTCPeerConnection(
    *
    */
   def getIdentityAssertion(): Promise[String] = js.native
-}
-
-
-
-@js.native
-trait MediaStreamConstraints extends js.Object {
-  var video: Boolean | MediaTrackConstraints = js.native
-  var audio: Boolean | MediaTrackConstraints = js.native
-  var peerIdentity: String = js.native
-}
-
-
-object MediaStreamConstraints {
-  def apply(
-      video: js.UndefOr[Boolean | MediaTrackConstraints] = js.undefined,
-      audio: js.UndefOr[Boolean | MediaTrackConstraints] = js.undefined,
-      peerIdentity: js.UndefOr[String] = js.undefined): MediaStreamConstraints = {
-    val result = js.Dynamic.literal()
-    video.foreach(v => result.video = v.asInstanceOf[js.Any])
-    audio.foreach(a => result.audio = a.asInstanceOf[js.Any])
-    peerIdentity.foreach(result.peerIdentity = _)
-    result.asInstanceOf[MediaStreamConstraints]
-  }
-}
-
-@js.native
-trait MediaTrackConstraints extends js.Object {
-  var advanced: js.Array[MediaTrackConstraintSet] = js.native
-}
-
-object MediaTrackConstraint {
-  def apply(
-      advanced: js.UndefOr[js.Array[MediaTrackConstraintSet]] = js.undefined): MediaTrackConstraints = {
-    val result = js.Dynamic.literal()
-    advanced.foreach(result.advanced = _)
-    result.asInstanceOf[MediaTrackConstraints]
-  }
-}
-
-@js.native
-trait MediaTrackConstraintSet extends js.Object {
-  var width: Long = js.native
-  var height: Long = js.native
-  var aspectRatio: Double = js.native
-  var frameRate: Double = js.native
-  var facingMode: String = js.native
-  var volume: Double = js.native
-  var sampleRate: Long = js.native
-  var sampleSize: Long = js.native
-  var echoCancellation: Boolean = js.native
-  var deviceId: String = js.native
-  var groupId: String = js.native
-}
-
-object MediaTrackConstraintSet {
-  def apply(
-      width: js.UndefOr[String] = js.undefined,
-      height: js.UndefOr[String] = js.undefined,
-      aspectRatio: js.UndefOr[String] = js.undefined,
-      frameRate: js.UndefOr[String] = js.undefined,
-      facingMode: js.UndefOr[String] = js.undefined,
-      volume: js.UndefOr[Double] = js.undefined,
-      sampleRate: js.UndefOr[Long] = js.undefined,
-      sampleSize: js.UndefOr[Long] = js.undefined,
-      echoCancellation: js.UndefOr[Boolean] = js.undefined,
-      deviceId: js.UndefOr[String] = js.undefined,
-      groupId: js.UndefOr[String] = js.undefined): MediaTrackConstraintSet = {
-    val result = js.Dynamic.literal()
-    width.foreach(result.width = _)
-    height.foreach(result.height = _)
-    aspectRatio.foreach(result.aspectRatio = _)
-    frameRate.foreach(result.frameRate = _)
-    facingMode.foreach(result.facingMode = _)
-    volume.foreach(result.volume = _)
-    sampleRate.foreach(result.sampleRate = _)
-    sampleSize.foreach(result.sampleSize = _)
-    echoCancellation.foreach(result.echoCancellation = _)
-    deviceId.foreach(result.deviceId = _)
-    groupId.foreach(result.groupId = _)
-    result.asInstanceOf[MediaTrackConstraintSet]
-  }
 }
 
 /**
