@@ -5787,19 +5787,19 @@ object MediaStreamTrack {
   }
 
   def apply(
-             enabled: js.UndefOr[Boolean] = js.undefined,
-             id: js.UndefOr[String] = js.undefined,
-             kind: js.UndefOr[String] = js.undefined,
-             label: js.UndefOr[String] = js.undefined,
-             muted: js.UndefOr[Boolean] = js.undefined,
-             readonly: js.UndefOr[Boolean] = js.undefined,
-             readyState: js.UndefOr[String] = js.undefined,
-             remote: js.UndefOr[Boolean] = js.undefined,
-             onstarted: js.UndefOr[js.Function0[Any]] = js.undefined,
-             onmute: js.UndefOr[js.Function0[Any]] = js.undefined,
-             onunmute: js.UndefOr[js.Function0[Any]] = js.undefined,
-             onoverconstrained: js.UndefOr[js.Function0[Any]] = js.undefined,
-             oneended: js.UndefOr[js.Function0[Any]] = js.undefined): MediaStreamTrack = {
+      enabled: js.UndefOr[Boolean] = js.undefined,
+      id: js.UndefOr[String] = js.undefined,
+      kind: js.UndefOr[String] = js.undefined,
+      label: js.UndefOr[String] = js.undefined,
+      muted: js.UndefOr[Boolean] = js.undefined,
+      readonly: js.UndefOr[Boolean] = js.undefined,
+      readyState: js.UndefOr[String] = js.undefined,
+      remote: js.UndefOr[Boolean] = js.undefined,
+      onstarted: js.UndefOr[js.Function0[Any]] = js.undefined,
+      onmute: js.UndefOr[js.Function0[Any]] = js.undefined,
+      onunmute: js.UndefOr[js.Function0[Any]] = js.undefined,
+      onoverconstrained: js.UndefOr[js.Function0[Any]] = js.undefined,
+      oneended: js.UndefOr[js.Function0[Any]] = js.undefined): MediaStreamTrack = {
     val result = js.Dynamic.literal()
     enabled.foreach(result.enabled = _)
     id.foreach(result.id = _)

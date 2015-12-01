@@ -5,7 +5,7 @@ package org.scalajs.dom.experimental.webrtc
 
 import org.scalajs.dom.raw.{Promise, DOMError, Event, EventTarget}
 import scala.scalajs.js
-import org.scalajs.dom.{MediaStream, MediaStreamEvent}
+import org.scalajs.dom.{MediaStreamTrack, MediaStream, MediaStreamEvent}
 import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.|
 
@@ -93,18 +93,18 @@ object RTCOfferOptions  {
 
 @js.native
 trait RTCIceServer extends js.Object {
-  var urls: String = js.native
+  var urls: String | js.Array[String] = js.native
   var username: String  = js.native
   var credential: String  = js.native
 }
 
 object RTCIceServer {
   def apply(
-      urls: js.UndefOr[String] = js.undefined,
+      urls: js.UndefOr[String | js.Array[String]] = js.undefined,
       username: js.UndefOr[String] = js.undefined,
       credential: js.UndefOr[String] = js.undefined): RTCIceServer = {
     val result = js.Dynamic.literal()
-    urls.foreach(result.urls = _)
+    urls.foreach(v => result.urls = v.asInstanceOf[js.Any])
     username.foreach(result.username = _)
     credential.foreach(result.credential = _)
     result.asInstanceOf[RTCIceServer]
@@ -155,8 +155,8 @@ object RTCConfiguration {
 
   object RTCBundlePolicy {
     val balanced = "balanced"
-    val maxCompat = "max-compat"
-    val maxBundle = "max-bundle"
+    val `max-compat` = "max-compat"
+    val `max-bundle` = "max-bundle"
   }
 
   def apply(
@@ -351,9 +351,9 @@ object IceConnectionState {
 
 object SignalingState {
   val stable = "stable"
-  val have_local_offer = "have-local-offer"
-  val have_local_pranswer = "have-local-pranswer"
-  val have_remote_pranswer = "have-remote-pranswer"
+  val `have-local-offer` = "have-local-offer"
+  val `have-local-pranswer` = "have-local-pranswer"
+  val `have-remote-pranswer` = "have-remote-pranswer"
   val closed = "closed"
 }
 
@@ -365,7 +365,7 @@ object SignalingState {
  */
 @js.native
 class RTCPeerConnection(
-    configuration:js.UndefOr[RTCConfiguration] = js.undefined) extends EventTarget {
+    configuration: js.UndefOr[RTCConfiguration] = js.undefined) extends EventTarget {
   /**
    * READONLY Returns an enum of type RTCIceConnectionState that describes the
    * ICE connection state for the connection. When this value changes, a
@@ -798,7 +798,7 @@ class RTCPeerConnection(
    *
    * MDN
    */
-  def createDTMFSender(): RTCDTMFSender = js.native
+  def createDTMFSender(track: MediaStreamTrack): RTCDTMFSender = js.native
 
   /**
    * Creates a new RTCStatsReport that contains and allows access to statistics
@@ -806,42 +806,79 @@ class RTCPeerConnection(
    *
    * MDN
    */
-  def getStats(): RTCStatsReport = js.native
+  def getStats(
+      selector: MediaStreamTrack,
+      callback: js.Function1[RTCStatsReport, Any],
+      error: js.Function1[DOMError, Any]): RTCStatsReport = js.native
 
   /**
-   * Sets the Identity Provider (IdP) to the triplet given in parameter: its
-   * name, the protocol used to communicate with it (optional) and an optional
-   * username. The IdP will be used only when an assertion will be needed.
+   * Sets the identity provider to be used for a given RTCPeerConnection object.
+   * Applications need not make this call; if the browser is already configured
+   * for an IdP, then that configured IdP might be used to get an assertion.
    *
-   * MDN
+   * When the setIdentityProvider() method is invoked, the user agent must run the
+   * following steps:
+   *    If the connection's RTCPeerConnection signalingState is closed, throw
+   *    an InvalidStateError exception and abort these steps.
+   *
+   *    Set the current identity provider values to the triplet (provider,
+   *    protocol, usernameHint).
+   *
+   *    If any identity provider value has changed, discard any stored identity
+   *    assertion.
+   *
+   *    Identity provider information is not used until an identity assertion
+   *    is required, either in response to a call to getIdentityAssertion, or a
+   *    session description is requested with a call to either createOffer or
+   *    createAnswer.
    */
-  def setIdentityProvider(id: js.Any): Unit = js.native
+  def setIdentityProvider(
+      provider: String,
+      protocol: String,
+      usernameHint: String): Unit = js.native
 
   /**
-   * Initiates the gathering of an identity assertion. This has an effect only
-   * if the signalingState is not "closed". It is not expected for the
-   * application dealing with the RTCPeerConnection: this is automatically
-   * done; an explicit call only allows to anticipate the need.
+   * Initiates the process of obtaining an identity assertion. Applications
+   * need not make this call. It is merely intended to allow them to start the
+   * process of obtaining identity assertions before a call is initiated. If an
+   * identity is needed, either because the browser has been configured with a
+   * default identity provider or because the setIdentityProvider() method was
+   * called, then an identity will be automatically requested when an offer or
+   * answer is created.
    *
-   * MDN
+   * When getIdentityAssertion is invoked, queue a task to run the following
+   * steps:
+   *
+   *    If the connection's RTCPeerConnection signalingState is closed, abort
+   *    these steps.
+   *
+   *    Request an identity assertion from the IdP.
+   *
+   *    Resolve the promise with the base64 and JSON encoded assertion.
+   *
    */
-  def getIdentityAssertion(id: js.Any): Unit = js.native
+  def getIdentityAssertion(): Promise[String] = js.native
 }
+
+
 
 @js.native
 trait MediaStreamConstraints extends js.Object {
   var video: Boolean | MediaTrackConstraints = js.native
   var audio: Boolean | MediaTrackConstraints = js.native
+  var peerIdentity: String = js.native
 }
 
 
 object MediaStreamConstraints {
   def apply(
-      video: js.UndefOr[js.Any] = js.undefined,
-      audio: js.UndefOr[js.Any] = js.undefined): MediaStreamConstraints = {
+      video: js.UndefOr[Boolean | MediaTrackConstraints] = js.undefined,
+      audio: js.UndefOr[Boolean | MediaTrackConstraints] = js.undefined,
+      peerIdentity: js.UndefOr[String] = js.undefined): MediaStreamConstraints = {
     val result = js.Dynamic.literal()
-    video.foreach(result.video = _)
-    audio.foreach(result.audio = _)
+    video.foreach(v => result.video = v.asInstanceOf[js.Any])
+    audio.foreach(a => result.audio = a.asInstanceOf[js.Any])
+    peerIdentity.foreach(result.peerIdentity = _)
     result.asInstanceOf[MediaStreamConstraints]
   }
 }
