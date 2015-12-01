@@ -13,6 +13,7 @@ package org.scalajs.dom.raw
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.typedarray.ArrayBuffer
+import org.scalajs.dom.experimental.mediastream._
 
 @js.native
 object XPathResult extends js.Object {
@@ -5502,13 +5503,96 @@ class MediaList extends js.Object {
  * The MediaStream interface represents a stream of media content.
  * A stream consists of several tracks, like video or audio tracks.
  *
+ * http://www.w3.org/TR/2013/WD-mediacapture-streams-20130903/#mediastream
+ *
  * MDN
  */
 @js.native
-trait MediaStream extends EventTarget {
-  // TODO
-}
+class MediaStream() extends EventTarget {
 
+  /**
+   * READONLY Is a Boolean value set to true if the ended event has been
+   * fired on the object, meaning that the stream has been completely read,
+   * or false if the end of the stream has not been reached.
+   *
+   * MDN
+   */
+  val ended: Boolean = js.native
+
+  /**
+   * READONLY Is a DOMString containing 36 characters denoting a universally
+   * unique identifier (UUID) for the object.
+   *
+   * MDN
+   */
+  val id: String = js.native
+
+  /**
+   * Is an EventHandler containing the action to perform when an addtrack event
+   * is fired when a new MediaStreamTrack object is added.
+   *
+   * MDN
+   */
+  var onaddtrack: js.Function1[Event, Any] = js.native
+
+  /**
+   * Is an EventHandler containing the action to perform when an removetrack
+   * event is fired when a  MediaStreamTrack object is removed from it.
+   *
+   * MDN
+   */
+  var onremovetrack: js.Function1[Event, Any] = js.native
+
+  /**
+   * Stores a copy of the MediaStreamTrack given as argument. If the track has
+   * already been added to the MediaStream object, nothing happens; if the
+   * track is in the finished state - that is, has already reached its end -
+   * the exception INVALID_STATE_RAISE is raised.
+   *
+   * MDN
+   */
+  def addTrack(track: MediaStreamTrack): Unit = js.native
+
+  /**
+   * Returns a list of the MediaStreamTrack objects stored in the MediaStream
+   * object that have their kind attribute set to "audio". The order is not
+   * defined, and may not only vary from one browser to another, but also from
+   * one call to another..
+   *
+   * MDN
+   */
+  def getAudioTracks(): js.Array[MediaStreamTrack] = js.native
+
+  /**
+   * Returns the track whose ID corresponds to the one given in parameters,
+   * trackid. If no parameter is given, or if no track with that ID does exist,
+   * it returns null. If several tracks have the same ID, it returns the first
+   * one.
+   *
+   * MDN
+   */
+  def getTrackById(id :String): MediaStreamTrack = js.native
+
+  /**
+   * Returns a list of the MediaStreamTrack objects stored in the MediaStream
+   * object that have their kind attribute set to "video". The order is not
+   * defined, and may not only vary from one browser to another, but also from
+   * one call to another.
+   *
+   * MDN
+   */
+  def getVideoTracks(): js.Array[MediaStreamTrack] = js.native
+
+  /**
+   * Removes the MediaStreamTrack given as argument. If the track is not part
+   * of the MediaStream object, nothing happens; if the track is in the
+   * finished state - that is, it has already reached its end - the exception
+   * INVALID_STATE_RAISE is raised.
+   *
+   * MDN
+   */
+  def removeTrack(track: MediaStreamTrack): Unit = js.native
+}
 
 /**
  * A processing instruction provides an opportunity for application-specific
