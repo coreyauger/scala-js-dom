@@ -112,6 +112,8 @@ object RTCIceServer {
   }
 }
 
+
+
 @js.native
 trait RTCConfiguration extends js.Object {
 
@@ -257,7 +259,7 @@ object MediaDevicesInfoKind {
 
 @js.native
 trait MediaDevicesInfo extends js.Object {
-  
+
   /**
    * Returns a DOMString that is an identifier for the represented device
    * that is persisted across sessions. It is un-guessable by other
@@ -805,7 +807,6 @@ class RTCPeerConnection(
    *
    * MDN
    */
-
   def getStats(
       selector: MediaStreamTrack,
       callback: js.Function1[RTCStatsReport, Any],
@@ -860,36 +861,3 @@ class RTCPeerConnection(
   def getIdentityAssertion(): Promise[String] = js.native
 }
 
-/**
- * ## This is an experimental technology ##
- * The MediaDevices interface provides access to connected media input devices
- * like cameras and microphones, as well as screensharing.
- *
- * MDN
- */
-@JSName("window.navigator.mediaDevices")
-@js.native
-object MediaDevices extends js.Object {
-
-  /**
-   * The MediaDevices.getUserMedia() method prompts the user for permission
-   * to use one video and/or one audio input device such as a camera or
-   * screensharing and/or a microphone. If the user provides permission, then
-   * the returned Promise is resolved with the resulting MediaStream object.
-   * If the user denies permission, or media is not available, then the promise
-   * is rejected with PermissionDeniedError or NotFoundError respectively. Note
-   * that it is possible for the returned promise to neither resolve nor
-   * reject, as the user is not required to make a choice.
-   *
-   * MDN
-   */
-  def getUserMedia(constraints: MediaStreamConstraints): Promise[MediaStream] = js.native
-
-  /**
-   * The MediaDevices.enumeratedDevices() method collects information about
-   * the media input and output devices available on the system.
-   *
-   * MDN
-   */
-  def enumerateDevices(): Promise[MediaDevicesInfo] = js.native
-}

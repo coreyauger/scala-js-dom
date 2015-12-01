@@ -5,7 +5,8 @@ package org.scalajs.dom.experimental.mediastream
 
 import org.scalajs.dom.MediaStream
 import scala.scalajs.js
-import org.scalajs.dom.raw.{Event, EventTarget}
+import org.scalajs.dom.raw.{DOMError, Event, EventTarget}
+import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.|
 
 @js.native
@@ -323,61 +324,9 @@ object MediaStreamConstraints {
   }
 }
 
-/*
+@JSName("window.navigator")
 @js.native
-trait MediaTrackConstraints extends js.Object {
-  var advanced: js.Array[MediaTrackConstraintSet] = js.native
-}
+trait NavigatorMediaStream extends js.Object {
 
-object MediaTrackConstraint {
-  def apply(
-             advanced: js.UndefOr[js.Array[MediaTrackConstraintSet]] = js.undefined): MediaTrackConstraints = {
-    val result = js.Dynamic.literal()
-    advanced.foreach(result.advanced = _)
-    result.asInstanceOf[MediaTrackConstraints]
-  }
+  def getUserMedia(constraints: MediaStreamConstraints, success: js.Function1[MediaStream, Any], error: js.Function1[DOMError, Any] ): Unit = js.native
 }
-
-@js.native
-trait MediaTrackConstraintSet extends js.Object {
-  var width: Long = js.native
-  var height: Long = js.native
-  var aspectRatio: Double = js.native
-  var frameRate: Double = js.native
-  var facingMode: String = js.native
-  var volume: Double = js.native
-  var sampleRate: Long = js.native
-  var sampleSize: Long = js.native
-  var echoCancellation: Boolean = js.native
-  var deviceId: String = js.native
-  var groupId: String = js.native
-}
-
-object MediaTrackConstraintSet {
-  def apply(
-             width: js.UndefOr[String] = js.undefined,
-             height: js.UndefOr[String] = js.undefined,
-             aspectRatio: js.UndefOr[String] = js.undefined,
-             frameRate: js.UndefOr[String] = js.undefined,
-             facingMode: js.UndefOr[String] = js.undefined,
-             volume: js.UndefOr[Double] = js.undefined,
-             sampleRate: js.UndefOr[Long] = js.undefined,
-             sampleSize: js.UndefOr[Long] = js.undefined,
-             echoCancellation: js.UndefOr[Boolean] = js.undefined,
-             deviceId: js.UndefOr[String] = js.undefined,
-             groupId: js.UndefOr[String] = js.undefined): MediaTrackConstraintSet = {
-    val result = js.Dynamic.literal()
-    width.foreach(result.width = _)
-    height.foreach(result.height = _)
-    aspectRatio.foreach(result.aspectRatio = _)
-    frameRate.foreach(result.frameRate = _)
-    facingMode.foreach(result.facingMode = _)
-    volume.foreach(result.volume = _)
-    sampleRate.foreach(result.sampleRate = _)
-    sampleSize.foreach(result.sampleSize = _)
-    echoCancellation.foreach(result.echoCancellation = _)
-    deviceId.foreach(result.deviceId = _)
-    groupId.foreach(result.groupId = _)
-    result.asInstanceOf[MediaTrackConstraintSet]
-  }
-}*/
