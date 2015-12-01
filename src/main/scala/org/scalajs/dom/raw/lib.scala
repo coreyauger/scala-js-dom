@@ -13,6 +13,7 @@ package org.scalajs.dom.raw
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.typedarray.ArrayBuffer
+import org.scalajs.dom.experimental.mediastream._
 
 @js.native
 object XPathResult extends js.Object {
@@ -5695,19 +5696,13 @@ object MediaStreamTrack{
 /**
  * The MediaStream
  *
+ * http://www.w3.org/TR/2013/WD-mediacapture-streams-20130903/#mediastream
+ *
  * MDN
  *
  */
 @js.native
 class MediaStream() extends EventTarget {
-
-  /**
-   * READONLY A Boolean value that returns true if the MediaStream is
-   * active, or false otherwise.
-   *
-   * MDN
-   */
-  val active: Boolean = js.native
 
   /**
    * READONLY Is a Boolean value set to true if the ended event has been
@@ -5727,28 +5722,12 @@ class MediaStream() extends EventTarget {
   val id: String = js.native
 
   /**
-   * Is an EventHandler containing the action to perform when an active event
-   * is fired when a MediaStream object becomes active.
-   *
-   * MDN
-   */
-  var onactive: js.Function1[Event, Any] = js.native
-
-  /**
    * Is an EventHandler containing the action to perform when an addtrack event
    * is fired when a new MediaStreamTrack object is added.
    *
    * MDN
    */
   var onaddtrack: js.Function1[Event, Any] = js.native
-
-  /**
-   * Is an EventHandler containing the action to perform when an inactive event
-   * is fired when a MediaStream object becomes inactive.
-   *
-   * MDN
-   */
-  var oninactive: js.Function1[Event,Any] = js.native
 
   /**
    * Is an EventHandler containing the action to perform when an removetrack
@@ -5766,7 +5745,7 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  def addTrack(track:MediaStreamTrack): Unit = js.native
+  def addTrack(track: MediaStreamTrack): Unit = js.native
 
   /**
    * Returns a list of the MediaStreamTrack objects stored in the MediaStream
@@ -5786,17 +5765,7 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  def getTrackById(id:String): MediaStreamTrack = js.native
-
-  /**
-   * Returns a list of all MediaStreamTrack objects stored in the MediaStream
-   * object, regardless of the value of the kind attribute. The order is not
-   * defined, and may not only vary from one browser to another, but also from
-   * one call to another.
-   *
-   * MDN
-   */
-  def getTracks(): js.Array[MediaStreamTrack] = js.native
+  def getTrackById(id :String): MediaStreamTrack = js.native
 
   /**
    * Returns a list of the MediaStreamTrack objects stored in the MediaStream
@@ -5816,9 +5785,8 @@ class MediaStream() extends EventTarget {
    *
    * MDN
    */
-  def removeTrack(track:MediaStreamTrack): Unit = js.native
+  def removeTrack(track: MediaStreamTrack): Unit = js.native
 }
-
 
 /**
  * A processing instruction provides an opportunity for application-specific

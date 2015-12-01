@@ -1,20 +1,25 @@
+/**
+ * http://www.w3.org/TR/2015/WD-webrtc-20150210/
+ */
 package org.scalajs.dom.experimental.webrtc
 
 import org.scalajs.dom.raw.{Promise, DOMError, Event, EventTarget}
 import scala.scalajs.js
+import org.scalajs.dom.MediaStream
+import org.scalajs.dom.experimental.mediastream._
 import scala.scalajs.js.annotation.JSName
-import org.scalajs.dom.{MediaStream, MediaStreamTrack, MediaStreamEvent}
+import scala.scalajs.js.|
 
 @js.native
-trait RTCIdentityAssertion extends js.Object{
-  val idp:String = js.native
-  val name:String = js.native
+trait RTCIdentityAssertion extends js.Object {
+  val idp: String = js.native
+  val name :String = js.native
 }
 
-object RTCIdentityAssertion{
+object RTCIdentityAssertion {
   def apply(
       idp: js.UndefOr[String] = js.undefined,
-      name: js.UndefOr[String] = js.undefined):RTCIdentityAssertion ={
+      name: js.UndefOr[String] = js.undefined): RTCIdentityAssertion = {
     val result = js.Dynamic.literal()
     idp.foreach(result.idp = _)
     name.foreach(result.name = _)
@@ -23,42 +28,84 @@ object RTCIdentityAssertion{
 }
 
 @js.native
-trait MediaConstraints extends js.Object{
-  var audio: Boolean = js.native
-  var video: Boolean = js.native
-  var optional: js.Array[js.Dynamic] =  js.native
-  var mandatory: js.Array[js.Dynamic] =  js.native
+trait RTCOfferOptions  extends js.Object {
+
+  /**
+   * When the value of this dictionary member is true, the generated
+   * description will have ICE credentials that are different from the current
+   * credentials (as visible in the localDescription attribute's SDP). Applying
+   * the generated description will restart ICE.
+   *
+   * When the value of this dictionary member is false, and the localDescription
+   * attribute has valid ICE credentials, the generated description will have
+   * the same ICE credentials as the current value from the localDescription
+   * attribute.
+   *
+   */
+  var iceRestart: Boolean = js.native
+
+  /**
+   * In some cases, an RTCPeerConnection may wish to receive audio but not send
+   * any audio. The RTCPeerConnection needs to know if it should signal to the
+   * remote side whether it wishes to receive audio. This option allows an
+   * application to indicate its preferences for the number of audio streams
+   * to receive when creating an offer.
+   *
+   */
+  var offerToReceiveAudio: Long = js.native
+
+  /**
+   * In some cases, an RTCPeerConnection may wish to receive video but not send
+   * any video. The RTCPeerConnection needs to know if it should signal to the
+   * remote side whether it wishes to receive video or not. This option allows
+   * an application to indicate its preferences for the number of video streams
+   * to receive when creating an offer.
+   *
+   */
+  var offerToReceiveVideo: Long = js.native
+
+  /**
+   * default: true
+   * Many codecs and system are capable of detecting "silence" and changing
+   * their behavior in this case by doing things such as not transmitting any
+   * media. In many cases, such as when dealing with emergency calling or
+   * sounds other than spoken voice, it is desirable to be able to turn off
+   * this behavior. This option allows the application to provide information
+   * about whether it wishes this type of processing enabled or disabled.
+   *
+   */
+  var voiceActivityDetection: Boolean = js.native
 }
 
-object MediaConstraints {
+object RTCOfferOptions  {
   def apply(
-      video: js.UndefOr[Boolean] = js.undefined,
-      audio: js.UndefOr[Boolean] = js.undefined,
-      optional: js.UndefOr[js.Array[js.Dynamic]] = js.undefined,
-      mandatory: js.UndefOr[js.Dynamic] = js.undefined): MediaConstraints = {
+      iceRestart: js.UndefOr[Boolean] = js.undefined,
+      offerToReceiveAudio: js.UndefOr[Long] = js.undefined,
+      offerToReceiveVideo: js.UndefOr[Long] = js.undefined,
+      voiceActivityDetection: js.UndefOr[Boolean] = js.undefined): RTCOfferOptions  = {
     val result = js.Dynamic.literal()
-    video.foreach(result.video = _)
-    audio.foreach(result.audio = _)
-    optional.foreach(result.optional = _)
-    mandatory.foreach(result.mandatory = _)
-    result.asInstanceOf[MediaConstraints]
+    iceRestart.foreach(result.iceRestart = _)
+    offerToReceiveAudio.foreach(result.offerToReceiveAudio = _)
+    offerToReceiveVideo.foreach(result.offerToReceiveVideo = _)
+    voiceActivityDetection.foreach(result.voiceActivityDetection = _)
+    result.asInstanceOf[RTCOfferOptions ]
   }
 }
 
 @js.native
-trait RTCIceServer extends js.Object{
-  var url:String  = js.native
-  var username:String  = js.native
-  var credential:String  = js.native
+trait RTCIceServer extends js.Object {
+  var urls: String | js.Array[String] = js.native
+  var username: String  = js.native
+  var credential: String  = js.native
 }
 
-object RTCIceServer{
+object RTCIceServer {
   def apply(
-      url: js.UndefOr[String] = js.undefined,
+      urls: js.UndefOr[String | js.Array[String]] = js.undefined,
       username: js.UndefOr[String] = js.undefined,
       credential: js.UndefOr[String] = js.undefined): RTCIceServer = {
     val result = js.Dynamic.literal()
-    url.foreach(result.url = _)
+    urls.foreach(v => result.urls = v.asInstanceOf[js.Any])
     username.foreach(result.username = _)
     credential.foreach(result.credential = _)
     result.asInstanceOf[RTCIceServer]
@@ -66,15 +113,61 @@ object RTCIceServer{
 }
 
 @js.native
-trait RTCConfiguration extends js.Object{
-  var iceServers:js.Array[RTCIceServer] = js.native
+trait RTCConfiguration extends js.Object {
+
+  /**
+   * An array containing URIs of servers available to be used by ICE, such
+   * as STUN and TURN server.
+   *
+   */
+  var iceServers: js.Array[RTCIceServer] = js.native
+
+  /**
+   * defaulting to "all"
+   * Indicates which candidates the ICE engine is allowed to use.
+   *
+   */
+  var iceTransportPolicy: String = js.native
+
+  /**
+   * defaulting to "balanced"
+   * Indicates which BundlePolicy to use.
+   *
+   */
+  var bundlePolicy: String = js.native
+
+  /**
+   * Sets the target peer identity for the RTCPeerConnection. The
+   * RTCPeerConnection will establish a connection to a remote peer unless
+   * it can be successfully authenticated with the provided name.
+   *
+   */
+  var peerIdentity: String = js.native
 }
 
 object RTCConfiguration {
+  object RTCIceTransportPolicy {
+    val none = "none"
+    val relay = "relay"
+    val all = "all"
+  }
+
+  object RTCBundlePolicy {
+    val balanced = "balanced"
+    val `max-compat` = "max-compat"
+    val `max-bundle` = "max-bundle"
+  }
+
   def apply(
-      iceServers: js.UndefOr[js.Array[RTCIceServer]] = js.undefined): RTCConfiguration = {
+      iceServers: js.UndefOr[js.Array[RTCIceServer]] = js.undefined,
+      iceTransportPolicy: js.UndefOr[String] = js.undefined,
+      bundlePolicy: js.UndefOr[String] = js.undefined,
+      peerIdentity: js.UndefOr[String] = js.undefined): RTCConfiguration = {
     val result = js.Dynamic.literal()
     iceServers.foreach(result.iceServers = _)
+    iceTransportPolicy.foreach(result.iceTransportPolicy = _)
+    bundlePolicy.foreach(result.bundlePolicy = _)
+    peerIdentity.foreach(result.peerIdentity = _)
     result.asInstanceOf[RTCConfiguration]
   }
 }
@@ -98,14 +191,14 @@ class RTCSessionDescription(options: js.Dynamic) extends js.Object {
    *
    * MDN
    */
-  var `type`:String = js.native
+  var `type`: String = js.native
 
   /**
    * A DOMString containing the SDP format describing the session.
    *
    * MDN
    */
-  var sdp:String = js.native
+  var sdp: String = js.native
 
   /**
    * Returns a JSON description of the object. The values of both properties,
@@ -114,13 +207,13 @@ class RTCSessionDescription(options: js.Dynamic) extends js.Object {
    *
    * MDN
    */
-  def toJson():js.Any = js.native
+  def toJson(): js.Any = js.native
 }
 
-object RTCSessionDescription{
+object RTCSessionDescription {
   def apply(
       `type`: js.UndefOr[String] = js.undefined,
-      sdp:   js.UndefOr[String] = js.undefined): RTCSessionDescription = {
+      sdp: js.UndefOr[String] = js.undefined): RTCSessionDescription = {
     val result = js.Dynamic.literal()
     `type`.foreach(result.`type` = _)
     sdp.foreach(result.sdp = _)
@@ -128,7 +221,7 @@ object RTCSessionDescription{
   }
 }
 
-object RTCSdpType{
+object RTCSdpType {
   val offer = "offer"
   val pranswer = "pranswer"
   val answer = "answer"
@@ -140,7 +233,7 @@ object RTCSdpType{
 class RTCIceCandidate(builder: js.Dynamic) extends js.Object {
   var candidate: String = js.native
   var sdpMLineIndex: Int = js.native
-  var sdpMid:String = js.native
+  var sdpMid: String = js.native
 }
 
 object RTCIceCandidate {
@@ -156,15 +249,15 @@ object RTCIceCandidate {
   }
 }
 
-object MediaDevicesInfoKind{
+object MediaDevicesInfoKind {
   val videoinput = "videoinput"
   val audioinput = "audioinput"
   val audiooutput = "audiooutput"
 }
 
 @js.native
-trait MediaDevicesInfo extends js.Object{
-
+trait MediaDevicesInfo extends js.Object {
+  
   /**
    * Returns a DOMString that is an identifier for the represented device
    * that is persisted across sessions. It is un-guessable by other
@@ -183,7 +276,7 @@ trait MediaDevicesInfo extends js.Object{
    *
    * MDN
    */
-  val groupId:String = js.native
+  val groupId: String = js.native
 
   /**
    * enum MediaDevicesInfoKind
@@ -192,7 +285,7 @@ trait MediaDevicesInfo extends js.Object{
    *
    * MDN
    */
-  val kind:String = js.native
+  val kind: String = js.native
 
   /**
    * Returns a DOMString that is a label describing this device (for example
@@ -201,7 +294,7 @@ trait MediaDevicesInfo extends js.Object{
    *
    * MDN
    */
-  val label:String = js.native
+  val label: String = js.native
 }
 
 object MediaDevicesInfo {
@@ -226,26 +319,26 @@ trait RTCDataChannel {
 }
 
 //https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection
-trait RTCDataChannelInit{
+trait RTCDataChannelInit {
   // TODO: ..
 }
 
 //https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection
-trait RTCDTMFSender{
+trait RTCDTMFSender {
   // TODO: ..
 }
 
 //https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection
-trait RTCStatsReport{
+trait RTCStatsReport {
   // TODO: ..
 }
 
 @js.native
-trait RTCPeerConnectionIceEvent extends Event{
-  val candidate:RTCIceCandidate  = js.native
+trait RTCPeerConnectionIceEvent extends Event {
+  val candidate: RTCIceCandidate  = js.native
 }
 
-object IceConnectionState{
+object IceConnectionState {
   val `new` = "new"
   val checking = "checking"
   val connected = "connected"
@@ -255,11 +348,11 @@ object IceConnectionState{
   val closed = "closed"
 }
 
-object SignalingState{
+object SignalingState {
   val stable = "stable"
-  val have_local_offer = "have-local-offer"
-  val have_local_pranswer = "have-local-pranswer"
-  val have_remote_pranswer = "have-remote-pranswer"
+  val `have-local-offer` = "have-local-offer"
+  val `have-local-pranswer` = "have-local-pranswer"
+  val `have-remote-pranswer` = "have-remote-pranswer"
   val closed = "closed"
 }
 
@@ -269,11 +362,9 @@ object SignalingState{
  * MDN
  *
  */
-@JSName("webkitRTCPeerConnection")
 @js.native
 class RTCPeerConnection(
-    configuration:js.UndefOr[RTCConfiguration] = js.undefined,
-    constraints:js.UndefOr[MediaConstraints] = js.undefined) extends EventTarget {
+    configuration: js.UndefOr[RTCConfiguration] = js.undefined) extends EventTarget {
   /**
    * READONLY Returns an enum of type RTCIceConnectionState that describes the
    * ICE connection state for the connection. When this value changes, a
@@ -322,6 +413,15 @@ class RTCPeerConnection(
    * MDN
    */
   val iceGatheringState: String = js.native
+
+  /**
+   * This attribute indicates whether the remote peer is able to accept trickled
+   * ICE candidates [TRICKLE-ICE]. The value is determined based on whether a
+   * remote description indicates support for trickle ICE, as defined in Section
+   * 4.1.9 of [RTCWEB-JSEP]. Prior to the completion of setRemoteDescription,
+   * this value is null.
+   */
+  val canTrickleIceCandidates: js.Any = js.native
 
   /**
    * READONLY Returns a RTCSessionDescription describing the session for the
@@ -441,7 +541,7 @@ class RTCPeerConnection(
    *
    * MDN
    */
-  var onidpvalidationerror: js.Function1[Event ,Any] = js.native
+  var onidpvalidationerror: js.Function1[Event, Any] = js.native
 
   /**
    * Is the event handler called when the negotiationneeded event, sent by the
@@ -477,60 +577,129 @@ class RTCPeerConnection(
   var onsignalingstatechange: js.Function1[Event, Any] = js.native
 
   /**
-   * Creates an offer that is a request to find a remote peer with a specific
-   * configuration. The two first parameters of this methods are respectively
-   * success and error callbacks, the optional third one are options the user
-   * want to have, like audio or video streams.
+   * The createOffer method generates a blob of SDP that contains an RFC 3264
+   * offer with the supported configurations for the session, including
+   * descriptions of the local MediaStreams attached to this RTCPeerConnection,
+   * the codec/RTP/RTCP options supported by this implementation, and any
+   * candidates that have been gathered by the ICE Agent. The options parameter
+   * may be supplied to provide additional control over the offer generated.
    *
-   * MDN
+   * As an offer, the generated SDP will contain the full set of capabilities
+   * supported by the session (as opposed to an answer, which will include only
+   * a specific negotiated subset to use); for each SDP line, the generation
+   * of the SDP must follow the appropriate process for generating an offer.
+   * In the event createOffer is called after the session is established,
+   * createOffer will generate an offer that is compatible with the current
+   * session, incorporating any changes that have been made to the session
+   * since the last complete offer-answer exchange, such as addition or removal
+   * of streams. If no changes have been made, the offer will include the
+   * capabilities of the current local description as well as any additional
+   * capabilities that could be negotiated in an updated offer.
+   *
+   * Session descriptions generated by createOffer must be immediately usable
+   * by setLocalDescription without causing an error as long as
+   * setLocalDescription is called reasonably soon. If a system has limited
+   * resources (e.g. a finite number of decoders), createOffer needs to return
+   * an offer that reflects the current state of the system, so that
+   * setLocalDescription will succeed when it attempts to acquire those
+   * resources. The session descriptions must remain usable by
+   * setLocalDescription without causing an error until at least the end of
+   * the fulfillment callback of the returned promise. Calling this method
+   * is needed to get the ICE user name fragment and password.
+   *
+   * If the RTCPeerConnection is configured to generate Identity assertions,
+   * then the session description shall contain an appropriate assertion.
+   *
+   * If this RTCPeerConnection object is closed before the SDP generation
+   * process completes, the USER agent must suppress the result and not resolve
+   * or reject the returned promise.
+   *
+   * If the SDP generation process completed successfully, the user agent must
+   * resolve the returned promise with a newly created RTCSessionDescription
+   * object, representing the generated offer.
+   *
+   * If the SDP generation process failed for any reason, the user agent must
+   * reject the returned promise with an DOMError object of type TBD as its
+   * argument.
+   *
+   * To Do: Discuss privacy aspects of this from a fingerprinting point of
+   * view - it's probably around as bad as access to a canvas :-)
+   *
+   * Parameter	Type	Nullable	Optional	Description
+   * options	RTCOfferOptions	✘	✔
+   * Return type: Promise<RTCSessionDescription>
    */
   def createOffer(
-      success:js.Function1[RTCSessionDescription, Any],
-      error:js.Function1[DOMError, Any],
-      options:js.UndefOr[MediaConstraints] = js.undefined): Unit = js.native
+      options: js.UndefOr[RTCOfferOptions] = js.undefined): Promise[RTCSessionDescription] = js.native
 
   /**
-   * Creates an answer to the offer received by the remote peer, in a two-part
-   * offer/answer negotiation of a connection. The two first parameters are
-   * respectively success and error callbacks, the optional third one represent
-   * options for the answer to be created.
+   * The createAnswer method generates an [SDP] answer with the supported
+   * configuration for the session that is compatible with the parameters in
+   * the remote configuration. Like createOffer, the returned blob contains
+   * descriptions of the local MediaStreams attached to this RTCPeerConnection,
+   * the codec/RTP/RTCP options negotiated for this session, and any candidates
+   * that have been gathered by the ICE Agent. The options parameter may be
+   * supplied to provide additional control over the generated answer.
    *
-   * MDN
+   * As an answer, the generated SDP will contain a specific configuration
+   * that, along with the corresponding offer, specifies how the media plane
+   * should be established. The generation of the SDP must follow the
+   * appropriate process for generating an answer.
+   *
+   * Session descriptions generated by createAnswer must be immediately usable
+   * by setLocalDescription without causing an error as long as
+   * setLocalDescription is called reasonably soon. Like createOffer, the
+   * returned description should reflect the current state of the system. The
+   * session descriptions must remain usable by setLocalDescription without
+   * causing an error until at least the end of the fulfillment callback of
+   * the returned promise. Calling this method is needed to get the ICE user
+   * name fragment and password.
+   *
+   * An answer can be marked as provisional, as described in [RTCWEB-JSEP], by
+   * setting the type to "pranswer".
+   *
+   * If the RTCPeerConnection is configured to generate Identity assertions,
+   * then the session description shall contain an appropriate assertion.
+   *
+   * If this RTCPeerConnection object is closed before the SDP generation process
+   * completes, the USER agent must suppress the result and not resolve or reject
+   * the returned promise.
+   *
+   * If the SDP generation process completed successfully, the user agent must
+   * resolve the returned promise with a newly created RTCSessionDescription
+   * object, representing the generated answer.
+   *
+   * If the SDP generation process failed for any reason, the user agent must
+   * reject the returned promise with a DOMError object of type TBD.
+   *
+   * No parameters.
+   * Return type: Promise<RTCSessionDescription>
    */
-  def createAnswer(
-      success:js.Function1[RTCSessionDescription, Any],
-      error:js.Function1[DOMError, Any],
-      options:js.UndefOr[MediaConstraints] = js.undefined): Unit = js.native
+  def createAnswer(): Promise[RTCSessionDescription] = js.native
 
   /**
    * Changes the local description associated with the connection. The
    * description defines the properties of the connection like its codec. The
    * connection is affected by this change and must be able to support both
-   * old and new descriptions. The method takes three parameters, a
-   * RTCSessionDescription object to set, and two callbacks, one called if
-   * the change of description succeeds, another called if it failed.
+   * old and new descriptions. The method takes one parameters, a
+   * RTCSessionDescription object to set, and returns a Promise.
    *
    * MDN
    */
   def setLocalDescription(
-      description:RTCSessionDescription,
-      success:js.Function0[Any],
-      error:js.Function1[DOMError,Any]): Unit = js.native
+      description: RTCSessionDescription): Promise[Any] = js.native
 
   /**
    * Changes the remote description associated with the connection. The
    * description defines the properties of the connection like its codec.
    * The connection is affected by this change and must be able to support
-   * both old and new descriptions. The method takes three parameters, a
-   * RTCSessionDescription object to set, and two callbacks, one called if
-   * the change of description succeeds, another called if it failed.
+   * both old and new descriptions. The method takes one parameters, a
+   * RTCSessionDescription object to set, and returns a Promise.
    *
    * MDN
    */
   def setRemoteDescription(
-      description:RTCSessionDescription,
-      success:js.Function0[Any],
-      error:js.Function1[DOMError,Any]): Unit = js.native
+      description: RTCSessionDescription): Promise[Any] = js.native
 
   /**
    * The updateIce method updates the ICE Agent process of gathering local
@@ -545,8 +714,7 @@ class RTCPeerConnection(
    * MDN
    */
   def updateIce(
-      configuration: js.UndefOr[RTCConfiguration] = js.undefined,
-      constraints: js.UndefOr[MediaConstraints] = js.undefined): Unit = js.native
+      configuration: js.UndefOr[RTCConfiguration] = js.undefined): Unit = js.native
 
   /**
    * The addIceCandidate() method provides a remote candidate to the ICE Agent.
@@ -559,8 +727,7 @@ class RTCPeerConnection(
    * MDN
    */
   def addIceCandidate(
-      candidate:RTCIceCandidate, success:js.Function0[Any],
-      error:js.Function1[DOMError, Any]): Unit = js.native
+      candidate: RTCIceCandidate): Promise[Any] = js.native
 
   def getConfiguration(): RTCConfiguration = js.native
 
@@ -621,8 +788,8 @@ class RTCPeerConnection(
    * MDN
    */
   def createDataChannel(
-      label:String,
-      options:js.UndefOr[RTCDataChannelInit] = js.undefined): RTCDataChannel = js.native
+      label: String,
+      options: js.UndefOr[RTCDataChannelInit] = js.undefined): RTCDataChannel = js.native
 
   /**
    * Creates a new RTCDTMFSender, associated to a specific MediaStreamTrack,
@@ -630,7 +797,7 @@ class RTCPeerConnection(
    *
    * MDN
    */
-  def createDTMFSender(): RTCDTMFSender = js.native
+  def createDTMFSender(track: MediaStreamTrack): RTCDTMFSender = js.native
 
   /**
    * Creates a new RTCStatsReport that contains and allows access to statistics
@@ -638,26 +805,59 @@ class RTCPeerConnection(
    *
    * MDN
    */
-  def getStats(): RTCStatsReport = js.native
+
+  def getStats(
+      selector: MediaStreamTrack,
+      callback: js.Function1[RTCStatsReport, Any],
+      error: js.Function1[DOMError, Any]): RTCStatsReport = js.native
 
   /**
-   * Sets the Identity Provider (IdP) to the triplet given in parameter: its
-   * name, the protocol used to communicate with it (optional) and an optional
-   * username. The IdP will be used only when an assertion will be needed.
+   * Sets the identity provider to be used for a given RTCPeerConnection object.
+   * Applications need not make this call; if the browser is already configured
+   * for an IdP, then that configured IdP might be used to get an assertion.
    *
-   * MDN
+   * When the setIdentityProvider() method is invoked, the user agent must run the
+   * following steps:
+   *    If the connection's RTCPeerConnection signalingState is closed, throw
+   *    an InvalidStateError exception and abort these steps.
+   *
+   *    Set the current identity provider values to the triplet (provider,
+   *    protocol, usernameHint).
+   *
+   *    If any identity provider value has changed, discard any stored identity
+   *    assertion.
+   *
+   *    Identity provider information is not used until an identity assertion
+   *    is required, either in response to a call to getIdentityAssertion, or a
+   *    session description is requested with a call to either createOffer or
+   *    createAnswer.
    */
-  def setIdentityProvider(id: js.Any): Unit = js.native
+  def setIdentityProvider(
+      provider: String,
+      protocol: String,
+      usernameHint: String): Unit = js.native
 
   /**
-   * Initiates the gathering of an identity assertion. This has an effect only
-   * if the signalingState is not "closed". It is not expected for the
-   * application dealing with the RTCPeerConnection: this is automatically
-   * done; an explicit call only allows to anticipate the need.
+   * Initiates the process of obtaining an identity assertion. Applications
+   * need not make this call. It is merely intended to allow them to start the
+   * process of obtaining identity assertions before a call is initiated. If an
+   * identity is needed, either because the browser has been configured with a
+   * default identity provider or because the setIdentityProvider() method was
+   * called, then an identity will be automatically requested when an offer or
+   * answer is created.
    *
-   * MDN
+   * When getIdentityAssertion is invoked, queue a task to run the following
+   * steps:
+   *
+   *    If the connection's RTCPeerConnection signalingState is closed, abort
+   *    these steps.
+   *
+   *    Request an identity assertion from the IdP.
+   *
+   *    Resolve the promise with the base64 and JSON encoded assertion.
+   *
    */
-  def getIdentityAssertion(id: js.Any): Unit = js.native
+  def getIdentityAssertion(): Promise[String] = js.native
 }
 
 /**
@@ -683,7 +883,7 @@ object MediaDevices extends js.Object {
    *
    * MDN
    */
-  def getUserMedia(constraints: MediaConstraints): Promise[MediaStream] = js.native
+  def getUserMedia(constraints: MediaStreamConstraints): Promise[MediaStream] = js.native
 
   /**
    * The MediaDevices.enumeratedDevices() method collects information about
