@@ -5700,6 +5700,8 @@ object MediaStreamTrack{
  *
  * http://www.w3.org/TR/2013/WD-mediacapture-streams-20130903/#mediastream
  *
+ * http://www.w3.org/TR/2013/WD-mediacapture-streams-20130903/#mediastream
+ *
  * MDN
  *
  */
