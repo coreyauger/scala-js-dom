@@ -5,7 +5,6 @@ package org.scalajs.dom.experimental.webrtc
 
 import org.scalajs.dom.raw.{Promise, DOMError, Event, EventTarget}
 import scala.scalajs.js
-import org.scalajs.dom.MediaStream
 import org.scalajs.dom.experimental.mediastream._
 import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.|
