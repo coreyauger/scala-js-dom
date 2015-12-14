@@ -1,8 +1,7 @@
 package org.scalajs.dom.experimental
 
 import org.scalajs.dom.DOMError
-import org.scalajs.dom.experimental.mediastream.MediaStreamConstraints
-import org.scalajs.dom.raw.MediaStream
+import org.scalajs.dom.experimental.mediastream._
 import scala.scalajs.js
 import scala.language.implicitConversions
 
